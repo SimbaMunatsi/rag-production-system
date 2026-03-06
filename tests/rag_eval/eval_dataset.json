@@ -1,0 +1,102 @@
+[
+  {
+    "question": "What is Artificial Intelligence (AI)?",
+    "ground_truth": "Artificial Intelligence is the ability of machines to imitate human intelligence, specifically the cognitive problem-solving capabilities such as learning, reasoning, and creating. [cite: 4298, 4346, 4348]",
+    "context": "Artificial intelligence, Al, which is the ability of machines to imitate human intellige nce. ... the ability of machines to imitate the cognitive problem- solving capabilities of human intelligence can be classified as Artificial Intelligence, or Al."
+  },
+  {
+    "question": "Distinguish between Machine Learning (ML) and Deep Learning (DL).",
+    "ground_truth": "Machine Learning is a subset of AI that uses algorithms to learn from past data to predict outcomes or identify trends. Deep Learning is a further subset of ML that uses multi-layered neural networks to learn from complex patterns in raw data, such as pixels in an image. [cite: 4299, 4300, 4454, 4457]",
+    "context": "Machine learning is a subset of Al, where algorithms are used to learn from past data and predict outcome on new data... deep learning, which is a further subset of machine learnin g, in which algorithms are modeled to learn from complex data using neural network s."
+  },
+  {
+    "question": "What is Supervised Machine Learning?",
+    "ground_truth": "Supervised machine learning is an approach where an algorithm learns from labeled data (input-output pairs) to build a model that can predict outcomes or classifications for new data. [cite: 4459, 4475, 4547]",
+    "context": "Supervised learning, where the algorithm I earns from labeled data, making predictions or classifications. ... It's learni ng from labeled data."
+  },
+  {
+    "question": "How does Unsupervised Machine Learning differ from Supervised Learning?",
+    "ground_truth": "Unlike supervised learning, unsupervised learning works with unlabeled data to discover hidden patterns, structures, or trends, such as grouping similar data points into clusters. [cite: 4460, 4489, 4549]",
+    "context": "Unsupervised learning is an algorithm that discovers patterns and structures in unlabeled data, such as clus tering or dimensionality reduction. ... Exploring patterns and data and grouping similar data into clusters drives unsup ervised machine learning."
+  },
+  {
+    "question": "Explain Reinforcement Learning.",
+    "ground_truth": "Reinforcement learning is a machine learning approach where an agent learns to make decisions through trial and error by interacting with an environment and receiving feedback in the form of rewards or penalties. [cite: 4461, 4493, 4694]",
+    "context": "reinforcement learning, wher e agents learn to make predictions and decisions by interacting with an environment and receiving rewards or punishments. ... a computer program I earns to make decisions by trying different actions and receiving feedback."
+  },
+  {
+    "question": "What are Neural Networks (ANN)?",
+    "ground_truth": "Artificial Neural Networks (ANN) are computational models inspired by the human brain, consisting of interconnected nodes called neurons arranged in layers (input, hidden, and output) that process information using weights and activation functions. [cite: 4504, 4789, 4790, 4795]",
+    "context": "Neural networks are like a bun ch of connected brain cells stacked together. ... Artificial neural networ ks are inspired by the human brain. They are made up of interconnected nodes calle d as neurons."
+  },
+  {
+    "question": "What is Generative AI?",
+    "ground_truth": "Generative AI is a type of AI that can create original new content, including text, images, audio, and videos, by learning underlying patterns from existing data. [cite: 4301, 4507, 4937, 4938]",
+    "context": "generative Al, which is a type of Al that can create new content. ... Generative Al, a subset of machine I earning, creates diverse content like text, audio, images, and more."
+  },
+  {
+    "question": "Define Large Language Models (LLMs) and their 'large' component.",
+    "ground_truth": "A Large Language Model is a probabilistic model trained on massive amounts of text to predict the next word in a sequence. The term 'large' refers to the exponential number of parameters (adjustable weights), often ranging from hundreds of millions to billions. [cite: 5004, 5031, 5032, 5093]",
+    "context": "A language model is a probabilistic model of text that determines the probability of a given sequence of words occurring in a sentence based on the previous words. ... The large in the large language model refers to the number of parameters."
+  },
+  {
+    "question": "What is the Transformer architecture and its advantage over RNNs?",
+    "ground_truth": "Transformers process data in parallel and use a self-attention mechanism to understand relationships between all words in a sentence simultaneously. This allows them to capture long-range dependencies better than Recurrent Neural Networks (RNNs), which process data sequentially and struggle with context in long sequences. [cite: 4402, 5178, 5181, 5208, 5223]",
+    "context": "transformers, which processes data in parallel. ... Transformers can look at all the words in the sentence at the same time, and underst and how they relate to each other. ... simultaneously understand the connection b etween Jane and dog, even though they are far apart in the sentence."
+  },
+  {
+    "question": "Explain Tokenization and its role in LLMs.",
+    "ground_truth": "Tokenization is the process of converting words, parts of words, or punctuation into numerical tokens that a language model can understand. Simple text may average one token per word, while complex text may require two to three tokens per word. [cite: 4393, 5268, 5271, 5272, 5273]",
+    "context": "those words need to be converted to numbers for it to be used to tr ain language models. This is called tokenization. ... Large language models understand tokens rather than words."
+  },
+  {
+    "question": "What are Embeddings?",
+    "ground_truth": "Embeddings are numerical (vector) representations of text (words, sentences, or paragraphs) that capture semantic meaning, allowing computers to understand relationships and similarities between different pieces of text. [cite: 4398, 5289, 5291, 5300]",
+    "context": "We need a way to indicate that similar words or sentences may be close by. This is done through representation called embedding. ... Embeddings make it easy for computers to understand the relationship between pie ces of text."
+  },
+  {
+    "question": "Describe Retrieval-Augmented Generation (RAG).",
+    "ground_truth": "RAG is an architecture that optimizes LLM output by first retrieving relevant information from a private knowledge base (like a vector database) and then using that retrieved content to provide grounded, informed, and accurate answers. [cite: 5347, 5596, 5622, 5638, 5639]",
+    "context": "this whole architecture is what is referred to as retrieval- augmented generation, or RAG. ... Language model can query enterprise knowledge bases ... to provide grounded response."
+  },
+  {
+    "question": "What is Prompt Engineering?",
+    "ground_truth": "Prompt engineering is the iterative process of refining the input text (prompt) provided to an LLM to elicit a specific style, quality, or accuracy of response. [cite: 5422, 5431, 5588]",
+    "context": "Prompt engineering is the process of iteratively refining a prompt for the purpose of eliciting a particular style of response."
+  },
+  {
+    "question": "What is AI Hallucination and how can it be mitigated?",
+    "ground_truth": "AI hallucination occurs when a model generates non-factual or ungrounded text that is not supported by the data it was exposed to. While there is no perfect method to stop it, techniques like retrieval-augmentation (RAG) can help reduce hallucinations by grounding answers in data. [cite: 5551, 5555, 5562, 5571]",
+    "context": "hall ucination is basically means the model generated text that is non- factual and ungrounded. ... retrieval augmented systems hallucinate less than 0- shot LLMs."
+  },
+  {
+    "question": "Explain the OCI Language service.",
+    "ground_truth": "OCI Language is a pre-trained service for sophisticated text analysis including language detection, sentiment analysis (per aspect and sentence), key phrase extraction, text classification into 600 categories, and named entity recognition. [cite: 5831, 4189, 4194, 4196]",
+    "context": "OCR Language allows you to perform sophisticated text analysis at scale. ... Detects the language of your text Identifies entities in text Identifies sentiment for each aspect of text Identifies key phrases ... Classifies general topic from list of 600 categories."
+  },
+  {
+    "question": "What are the capabilities of OCI Vision?",
+    "ground_truth": "OCI Vision provides image analysis (object detection and image classification) and Document AI (text recognition/OCR, document classification, table extraction, and key-value extraction from documents like receipts). [cite: 4216, 4217, 4223, 4225, 4230]",
+    "context": "OCI Vision: Image Analysis Object Detection ... Image Classification ... Document AI Text Recognition ... Document classification ... Table Extraction ... Key Value Extraction."
+  },
+  {
+    "question": "What is OCI Select AI?",
+    "ground_truth": "Select AI is a feature of Oracle Autonomous Database that allows users to query data using natural language. It translates natural language questions into SQL queries by interacting with an LLM and understanding the database metadata. [cite: 4022, 4142, 4146, 4160, 4167]",
+    "context": "lever age the Oracle Autonomous Database with large language models to an alyze our data and return results through SQL queries just by asking and using natura I language. ... Select Al takes the question in natural language and translat es into SQL language."
+  },
+  {
+    "question": "Identify the principles of Responsible AI.",
+    "ground_truth": "Responsible AI principles include: Human Autonomy (human-centric design and oversight), Prevention of Harm (safety and security), Fairness (lack of bias and discrimination), and Explicability (transparency and explainability of decisions). [cite: 3982, 3998, 3999, 4004, 4006]",
+    "context": "Guiding principles for AI to be trustworthy ... Respect for human autonomy Prevention of harm Fairness Explicability ... Human centric and allow human oversight ... Technical robustness and safety ... Privacy and data governance Transparency ... Accountability."
+  },
+  {
+    "question": "Why are GPUs essential for AI infrastructure?",
+    "ground_truth": "GPUs are essential because they use parallel computing with thousands of cores to perform repetitive, simple calculations rapidly. This allows them to crunch through massive datasets for model training and inference with much higher throughput than CPUs. [cite: 3915, 3917, 3919, 3923, 3925]",
+    "context": "Graphics Processing Unit, or GPU, is a very important component of Al infrastructure. ... Machine learning and Al workloa ds need lots of repetitive calculations ... Parallel computing on GPUs is designed to run many processes at the same time."
+  },
+  {
+    "question": "When should Fine-tuning be used instead of Prompt Engineering?",
+    "ground_truth": "Fine-tuning is recommended when a pre-trained model does not perform well on a specific task, when the model needs to learn new skills or a unique domain-specific style, or when the data required for context is too large for a prompt. [cite: 5590, 5662, 5678, 5713]",
+    "context": "Fine-tuning is needed when your LLM does not perform well on a particular task and the data required might be too large. ... Recommended when a pretrained model doesn't perform your task well or when you want to teach it something new."
+  }
+]

@@ -1,0 +1,14 @@
+# API Keys and Secrets
+.env
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+.venv/
+
+# Local Vector Database (Too large for GitHub)
+data/embeddings/
+data/raw/
+
+# Testing/Evals
+.pytest_cache/
