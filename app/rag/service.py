@@ -6,6 +6,7 @@ from app.generation.generator import Generator
 from app.memory.conversation_memory import ConversationMemory
 from app.generation.source_formatter import SourceFormatter
 from app.rag.pipeline import RAGPipeline
+from app.guardrails.guardrails import Guardrails
 
 
 def create_rag_pipeline():
@@ -24,6 +25,8 @@ def create_rag_pipeline():
 
     source_formatter = SourceFormatter()
 
+    guardrails = Guardrails()
+
     rag = RAGPipeline(
     retriever=retriever,
     reranker=reranker,
@@ -31,7 +34,8 @@ def create_rag_pipeline():
     prompt_builder=prompt_builder,
     generator=generator,
     memory=memory,
-    source_formatter=source_formatter
+    source_formatter=source_formatter,
+    guardrails = guardrails
     )
 
     return rag
