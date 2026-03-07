@@ -1,21 +1,27 @@
 class PromptBuilder:
 
-    def build(self, query: str, context: str):
+    def build(self, query, context, memory):
+        conversation = memory.get("conversation", [])
+        semantic = memory.get("semantic", [])
 
-        prompt = f"""
-You are an expert assistant.
+        conversation_text = "\n".join(
+            f"{item['role']}: {item['content']}" for item in conversation
+        )
 
-Use ONLY the context below to answer the question.
+        semantic_text = "\n".join(semantic)
 
-If the answer is not in the context, say "I don't know".
+        return f"""
+You are a helpful assistant.
 
-Context:
+Conversation History:
+{conversation_text}
+
+Semantic Memory:
+{semantic_text}
+
+Retrieved Context:
 {context}
 
-Question:
+User Question:
 {query}
-
-Answer:
 """
-
-        return prompt
