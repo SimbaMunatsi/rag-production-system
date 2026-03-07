@@ -1,19 +1,19 @@
-from app.memory.base_memory import BaseMemory
+class ConversationMemory:
 
-
-class ConversationMemory(BaseMemory):
-
-    def __init__(self):
-
+    def __init__(self, window_size=5):
+        self.window_size = window_size
         self.history = []
 
-    def add(self, query, answer):
+    def add(self, role, message):
 
         self.history.append({
-            "query": query,
-            "answer": answer
+            "role": role,
+            "content": message
         })
 
-    def get_history(self):
+        if len(self.history) > self.window_size:
+            self.history.pop(0)
+
+    def get_context(self):
 
         return self.history

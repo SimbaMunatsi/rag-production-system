@@ -1,3 +1,4 @@
+from app.memory.memory_manager import MemoryManager
 from app.retrieval.retriever import Retriever
 from app.retrieval.reranker import Reranker
 from app.retrieval.context_compressor import ContextCompressor
@@ -7,6 +8,7 @@ from app.memory.conversation_memory import ConversationMemory
 from app.generation.source_formatter import SourceFormatter
 from app.rag.pipeline import RAGPipeline
 from app.guardrails.guardrails import Guardrails
+from app.core.vector_store import get_vector_store
 
 
 def create_rag_pipeline():
@@ -26,6 +28,10 @@ def create_rag_pipeline():
     source_formatter = SourceFormatter()
 
     guardrails = Guardrails()
+
+    vector_store = get_vector_store()
+
+    memory = MemoryManager(vector_store)
 
     rag = RAGPipeline(
     retriever=retriever,
