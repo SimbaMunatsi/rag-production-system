@@ -7,54 +7,70 @@ class RAGPipeline:
         compressor,
         prompt_builder,
         generator,
-        memory,
+        memory_getter,
         source_formatter,
         guardrails,
+        query_rewriter,
     ):
         self.retriever = retriever
         self.reranker = reranker
         self.compressor = compressor
         self.prompt_builder = prompt_builder
         self.generator = generator
-        self.memory = memory
+        self.memory_getter = memory_getter
         self.source_formatter = source_formatter
         self.guardrails = guardrails
+        self.query_rewriter = query_rewriter
 
-    def run(self, query):
+    def run(self, query, session_id):
 
-        # 1. Validate input
+        memory = self.memory_getter(session_id)
+
         safe_query = self.guardrails.validate_input(query)
 
-        # 2. Build memory context
-        memory_context = self.memory.build_context(safe_query)
+        memory_context = memory.build_context(safe_query)
 
-        # 3. Retrieve documents
-        docs = self.retriever.retrieve(safe_query)
-
-        # 4. Rerank documents
-        docs = self.reranker.rerank(safe_query, docs)
-
-        # 5. Compress documents
-        context = self.compressor.compress(docs)
-        context_text = "\n\n".join(context)
-
-        # 6. Build final prompt
-        prompt = self.prompt_builder.build(
+        standalone_query = self.query_rewriter.rewrite(
             query=safe_query,
+            memory=memory_context
+        )
+
+        docs = self.retriever.retrieve(standalone_query)
+        docs = self.reranker.rerank(standalone_query, docs)
+
+        if not docs:
+            return {
+                "answer": (
+                    "I can only answer questions based on the OCI AI Foundations document, "
+                    "and I could not find relevant support for that question in the document."
+                ),
+                "sources": []
+            }
+
+        context = self.compressor.compress(docs)
+        context_text = "\n\n".join(context).strip()
+
+        if not context_text:
+            return {
+                "answer": (
+                    "I can only answer questions based on the OCI AI Foundations document, "
+                    "and I could not find relevant support for that question in the document."
+                ),
+                "sources": []
+            }
+
+        prompt = self.prompt_builder.build(
+            query=standalone_query,
             context=context_text,
             memory=memory_context
         )
 
-        # 7. Generate answer from final prompt
         answer = self.generator.generate(prompt)
 
-        # 8. Validate output
-        safe_answer = self.guardrails.validate_output(safe_query, answer)
+        safe_answer = self.guardrails.validate_output(standalone_query, answer)
 
-        # 9. Update memory
-        self.memory.update(safe_query, safe_answer)
+        memory.update(safe_query, safe_answer)
 
-        # 10. Format sources
         sources = self.source_formatter.format(docs)
 
         return {

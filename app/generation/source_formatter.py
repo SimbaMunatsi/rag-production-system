@@ -1,14 +1,15 @@
 class SourceFormatter:
 
-    def format(self, documents):
-
+    def format(self, docs):
         sources = []
 
-        for doc in documents:
+        for doc in docs:
+            source = doc.metadata.get("source", "unknown source")
+            page = doc.metadata.get("page")
 
-            sources.append({
-                "content": doc.page_content[:200],
-                "metadata": doc.metadata
-            })
+            if page is not None:
+                sources.append(f"{source} (page {page})")
+            else:
+                sources.append(source)
 
         return sources
