@@ -28,3 +28,15 @@ class MemoryManager:
         self.conversation.add("assistant", answer)
 
         self.episodic.store_event(query, answer)
+
+
+    # ---------- MEMORY REGISTRY ----------
+
+memory_registry = {}
+
+def get_memory(session_id, vector_store):
+
+    if session_id not in memory_registry:
+        memory_registry[session_id] = MemoryManager(vector_store)
+
+    return memory_registry[session_id]    
