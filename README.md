@@ -147,7 +147,7 @@ Supports:
 ## 🗂️ Project Structure
 
 ```text
-rag-system/
+rag-production-system/
 │
 ├── app/
 │   ├── api/
