@@ -300,7 +300,7 @@ http://localhost:8501
 POST /query
 
 {
-  "query": "What is the refund policy?",
+  "query": "What is AI?",
   "session_id": "user123"
 }
 ```
@@ -311,9 +311,9 @@ POST /query
 
 ```json
 {
-  "answer": "Refunds are allowed within 30 days.",
+  "answer": "AI is the ability of machines to imitate human intelligence",
   "sources": [
-    "Refund policy: customers can request refunds within 30 days."
+    "data/docs/AI Foundations: page 3"
   ]
 }
 ```
