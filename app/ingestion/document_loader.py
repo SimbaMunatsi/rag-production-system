@@ -1,4 +1,3 @@
-import os
 from langchain_community.document_loaders import (
     DirectoryLoader,
     TextLoader,
@@ -16,7 +15,6 @@ class DocumentLoader:
 
     def load(self):
 
-        #print(f"DEBUG: Looking for files in {os.path.abspath(self.path)}") 
 
         loaders = [
             DirectoryLoader(
@@ -57,7 +55,6 @@ class DocumentLoader:
 
         for loader in loaders:
             loaded_docs = loader.load()
-            #print(f"DEBUG: Loaded {len(loaded_docs)} docs using {loader}")
             documents.extend(loaded_docs) 
 
         return documents
