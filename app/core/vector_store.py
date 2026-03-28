@@ -5,8 +5,9 @@ from app.core.config import settings
 
 
 def get_vector_store():
-
-    embeddings = OpenAIEmbeddings()
+    embeddings = OpenAIEmbeddings(
+        api_key=settings.OPENAI_API_KEY
+    )
 
     vector_store = Chroma(
         persist_directory=settings.CHROMA_DB_PATH,

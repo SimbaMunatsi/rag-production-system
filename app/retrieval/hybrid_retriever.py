@@ -4,7 +4,7 @@ from app.core.vector_store import get_vector_store
 
 class HybridRetriever:
 
-    def __init__(self, documents, k=10):
+    def __init__(self, documents, k=8):
 
         self.vector_store = get_vector_store()
 

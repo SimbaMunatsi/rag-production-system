@@ -1,4 +1,6 @@
-# 🧠 Production Agentic RAG System
+# ⚖️ Bumbiro — AI Constitutional Assistant
+
+> ⚖️ Making the Zimbabwe Constitution accessible through AI
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
 ![FastAPI](https://img.shields.io/badge/FastAPI-Production-green)
@@ -6,25 +8,46 @@
 ![LLM](https://img.shields.io/badge/LLM-RAG%20System-purple)
 ![Status](https://img.shields.io/badge/Status-Active-success)
 
-A **production-style Retrieval-Augmented Generation (RAG) system** with a clean chat interface, evaluation pipelines, and AI safety guardrails.
-
 ---
 
 ## 🚀 Overview
 
-This project demonstrates how modern AI systems are built in production environments.
+**Bumbiro** is a production-grade AI assistant designed to answer questions about the Zimbabwe Constitution.
 
-It combines:
+It leverages Retrieval-Augmented Generation (RAG), evaluation pipelines, and AI safety guardrails to provide accurate, context-grounded constitutional answers.
 
-* Retrieval-Augmented Generation (RAG)
-* modular backend architecture
-* evaluation-driven development
-* AI safety guardrails
-* clean user interface
+Bumbiro was designed to make the Zimbabwe Constitution more accessible, understandable, and interactive through AI.
 
-Unlike basic chatbot projects, this system focuses on:
+Legal and constitutional documents are often difficult to navigate, especially for non-legal users. This system bridges that gap by enabling users to ask natural language questions and receive grounded answers directly from constitutional text.
 
-> **reliability, observability, and production readiness**
+---
+
+## ⚖️ What is Bumbiro?
+
+Bumbiro is an AI-powered constitutional assistant that enables users to interact with the Zimbabwe Constitution through natural language.
+
+Instead of manually searching through legal documents, users can ask questions such as:
+
+* "How do I become a Zimbabwean citizen?"
+* "What rights are protected under the Constitution?"
+* "What does the Constitution say about freedom of expression?"
+
+The system retrieves relevant constitutional provisions and generates grounded, explainable answers.
+
+---
+
+## 🎯 Motivation
+
+The Zimbabwe Constitution is the supreme law of the country, yet accessing and understanding it remains a challenge for many.
+
+Bumbiro was built to:
+
+* simplify access to constitutional knowledge
+* enable natural language interaction with legal text
+* reduce reliance on manual document search
+* demonstrate how AI can be applied to real-world civic and legal systems
+
+This project goes beyond a generic chatbot by focusing on **trust, accuracy, and legal grounding**.
 
 ---
 
@@ -35,7 +58,7 @@ User (Streamlit UI)
         ↓
 FastAPI API Layer
         ↓
-RAG Pipeline
+Bumbiro RAG Pipeline
  ├── Input Guardrails
  ├── Retriever (Chroma Vector DB)
  ├── Context Builder
@@ -47,12 +70,14 @@ RAG Pipeline
 Answer + Sources
 ```
 
+The system is specifically optimized for constitutional question answering, ensuring responses are grounded in the Zimbabwe Constitution rather than general knowledge.
+
 ---
 
 ## 🔁 RAG Pipeline Flow
 
 ```text
-Documents
+Zimbabwe Constitution Documents
    ↓
 Loader → Cleaner → Chunker
    ↓
@@ -77,11 +102,12 @@ Final Answer
 
 ## ✨ Core Features
 
-### 🔍 Retrieval-Augmented Generation
+### 🔍 Constitutional Question Answering
 
-* Semantic search using vector embeddings
-* Context-aware responses grounded in knowledge base
-* Improved answer accuracy vs standard LLM prompts
+* Semantic search over Zimbabwe Constitution documents
+* Context-grounded answers based on constitutional text
+* Handles natural language queries (e.g., "How do I become a citizen?")
+* Reduces hallucinations by strictly using retrieved legal context
 
 ---
 
@@ -181,7 +207,7 @@ rag-production-system/
 │   ├── generation/
 │   │   ├── base_generator.py
 │   │   ├── prompt_builder.py
-|   |   |__ source_formatter.py
+|   |   ├── source_formatter.py
 │   │   └── generator.py
 │   │
 │   ├── memory/
@@ -227,7 +253,6 @@ rag-production-system/
 ├── requirements.txt
 ├── README.md
 └── streamlit_app.py
-
 ```
 
 ---
@@ -237,7 +262,7 @@ rag-production-system/
 ### 1. Clone the repo
 
 ```bash
-git https://github.com/SimbaMunatsi/rag-production-system
+git https://github.com/SimbaMunatsi/rag-production-system.git
 cd rag-production-system
 ```
 
@@ -300,7 +325,7 @@ http://localhost:8501
 POST /query
 
 {
-  "query": "What is AI?",
+  "query": "How can I become a Zimbabwean citizen?",
   "session_id": "user123"
 }
 ```
@@ -311,9 +336,9 @@ POST /query
 
 ```json
 {
-  "answer": "AI is the ability of machines to imitate human intelligence",
+  "answer": "A person may become a Zimbabwean citizen by registration if they meet conditions such as lawful residence or marriage to a Zimbabwean citizen, as provided in the Constitution.",
   "sources": [
-    "data/docs/AI Foundations: page 3"
+    "Zimbabwe Constitution — Chapter 3: Citizenship"
   ]
 }
 ```
@@ -322,7 +347,7 @@ POST /query
 
 ## 🧪 Evaluation Strategy
 
-The system is tested like software:
+Bumbiro is tested like a production AI system:
 
 * unit tests (retrieval + pipeline)
 * LLM evaluation (Ragas, DeepEval)
@@ -349,7 +374,7 @@ Includes protection against:
 * Python
 * FastAPI
 * Streamlit
-* LangChain 
+* LangChain
 * ChromaDB
 * Ragas
 * DeepEval
@@ -359,20 +384,21 @@ Includes protection against:
 
 ## 📈 Why This Project Stands Out
 
-Most AI projects:
+Most AI legal assistants:
 
-❌ simple chatbot
+❌ generic chatbot with no legal grounding
 ❌ no evaluation
 ❌ no safety
 ❌ no structure
 
-This project:
+Bumbiro:
 
-✔ production-style architecture
+✔ domain-specific (constitutional AI assistant)
+✔ grounded in real legal documents
 ✔ evaluation pipelines
-✔ modular design
+✔ modular architecture
 ✔ API-first system
-✔ real-world engineering practices
+✔ designed for civic and legal accessibility
 
 ---
 
@@ -380,7 +406,7 @@ This project:
 
 * document upload from UI
 * streaming responses in frontend
-* hybrid retrieval (keyword + vector)
+* enhanced hybrid retrieval (keyword + vector)
 * multi-agent system integration
 * Docker & cloud deployment
 
@@ -394,10 +420,10 @@ This project:
 
 ## ⭐ Final Note
 
-This project reflects how modern AI systems are engineered — not just built.
+Bumbiro reflects how modern AI systems are engineered — not just built.
 
 It demonstrates the transition from:
 
-> “using LLMs” → **engineering AI systems**
+> “using LLMs” → **engineering domain-specific AI systems with real-world impact**
 
 ---

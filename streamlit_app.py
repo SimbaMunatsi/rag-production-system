@@ -7,8 +7,8 @@ import streamlit as st
 
 
 st.set_page_config(
-    page_title="AI Foundations Assistant",
-    page_icon="🧠",
+    page_title="BUMBIRO",
+    page_icon="⚖️",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
@@ -73,7 +73,7 @@ def queue_prompt(prompt: str) -> None:
 
 def render_sidebar() -> None:
     with st.sidebar:
-        st.markdown("## AI Foundations Assistant")
+        st.markdown("## ZIM Constitution AI Assistant")
 
         if st.button("New chat", use_container_width=True):
             new_chat()
@@ -83,29 +83,6 @@ def render_sidebar() -> None:
             clear_chat()
             st.rerun()
 
-        st.markdown("---")
-        st.markdown("### Connection")
-
-        api_url = st.text_input(
-            "Backend URL",
-            value=st.session_state.api_url,
-            help="FastAPI base URL",
-        ).rstrip("/")
-        st.session_state.api_url = api_url
-
-        if st.button("Check backend", use_container_width=True):
-            ok, message = check_backend(st.session_state.api_url)
-            st.session_state.backend_status = (ok, message)
-
-        status = st.session_state.backend_status
-        if status:
-            ok, message = status
-            if ok:
-                st.success(message)
-            else:
-                st.error(message)
-
-        st.markdown("---")
         st.markdown("### Preferences")
 
         st.session_state.show_sources = st.toggle(
@@ -117,10 +94,9 @@ def render_sidebar() -> None:
         st.markdown("### Try asking")
 
         example_prompts = [
-           "What is Artificial Intelligence?",
-           "What are some ethical concerns around AI?",
-           "Give example use-cases of supervised learning?",
-           "Explain LSTM",
+           "What is the Constitution of Zimbabwe?",
+           "Under what circumstances can the President be removed from office?",
+           "When can the military be deployed?",
         ]
 
         for prompt in example_prompts:
@@ -157,8 +133,8 @@ def render_header() -> None:
             background: rgba(255,255,255,0.02);
         }
         </style>
-        <div class="app-title">🧠 AI Foundations Assistant</div>
-        <div class="app-subtitle">Learn the fundamentals of AI.</div>
+        <div class="app-title">⚖️ BUMBIRO</div>
+        <div class="app-subtitle">Learn about the Zimbabwean Constitution</div>
         """,
         unsafe_allow_html=True,
     )
@@ -168,9 +144,8 @@ def render_welcome_state() -> None:
     st.markdown(
         """
         <div class="empty-state">
-            <h4 style="margin-top: 0;">Start a conversation</h4>
             <p style="margin-bottom: 0.4rem;">
-                Ask anything about Foundational AI, Machine Learning, LLMs, Prompting, and more.
+                Ask questions about the Zimbabwean Constitution.
             </p>
         </div>
         """,
@@ -179,10 +154,10 @@ def render_welcome_state() -> None:
 
     cols = st.columns(2)
     suggestions = [
-        "What is Artificial Intelligence?",
-        "What are some ethical concerns around AI?",
-        "Give example use-cases of supervised learning?",
-        "Explain LSTM",
+        "What is the Constitution of Zimbabwe?",
+        "What is the role of Parliament?",
+        "When is a person a Zimbabwean citizen by birth?",
+        "Who/what is Bumbiro?",
     ]
 
     for i, prompt in enumerate(suggestions):

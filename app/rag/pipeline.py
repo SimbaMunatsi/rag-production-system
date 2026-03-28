@@ -23,11 +23,9 @@ class RAGPipeline:
         self.query_rewriter = query_rewriter
 
     def run(self, query, session_id):
-
         memory = self.memory_getter(session_id)
 
         safe_query = self.guardrails.validate_input(query)
-
         memory_context = memory.build_context(safe_query)
 
         standalone_query = self.query_rewriter.rewrite(
@@ -41,8 +39,8 @@ class RAGPipeline:
         if not docs:
             return {
                 "answer": (
-                    "I can only answer questions based on the OCI AI Foundations document, "
-                    "and I could not find relevant support for that question in the document."
+                    "I could not find enough relevant support in the Zimbabwe Constitution "
+                    "to answer that confidently."
                 ),
                 "sources": []
             }
@@ -51,10 +49,15 @@ class RAGPipeline:
         context_text = "\n\n".join(context).strip()
 
         if not context_text:
+            context_text = "\n\n".join(
+                [doc.page_content for doc in docs if hasattr(doc, "page_content")]
+            ).strip()
+
+        if not context_text:
             return {
                 "answer": (
-                    "I can only answer questions based on the OCI AI Foundations document, "
-                    "and I could not find relevant support for that question in the document."
+                    "I could not find enough relevant support in the Zimbabwe Constitution "
+                    "to answer that confidently."
                 ),
                 "sources": []
             }
@@ -66,11 +69,9 @@ class RAGPipeline:
         )
 
         answer = self.generator.generate(prompt)
-
         safe_answer = self.guardrails.validate_output(standalone_query, answer)
 
         memory.update(safe_query, safe_answer)
-
         sources = self.source_formatter.format(docs)
 
         return {
