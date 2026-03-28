@@ -241,8 +241,8 @@ rag-production-system/
 ├── tests/
 │   ├── unit/
 │   ├── integration/
-|   ├── guardrails/
-│   └── rag_eval/
+|   ├── fixtures/
+│   └── conftest.py
 │
 ├── scripts/
 │   ├── ingest_data.py
@@ -262,7 +262,7 @@ rag-production-system/
 ### 1. Clone the repo
 
 ```bash
-git https://github.com/SimbaMunatsi/rag-production-system.git
+git clone https://github.com/SimbaMunatsi/rag-production-system.git
 cd rag-production-system
 ```
 
