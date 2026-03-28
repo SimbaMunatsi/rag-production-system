@@ -290,7 +290,6 @@ CHROMA_DB_PATH=./data/embeddings
 ```
 
 ---
----
 
 ### 4. Ingest data
 
@@ -298,9 +297,6 @@ CHROMA_DB_PATH=./data/embeddings
 python -m scripts.ingest_data 
 ```
    #ingested 851 chunks
-```
-http://localhost:8000/docs
-```
 
 ---
 
