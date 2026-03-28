@@ -290,8 +290,21 @@ CHROMA_DB_PATH=./data/embeddings
 ```
 
 ---
+---
 
-### 4. Start FastAPI backend
+### 4. Ingest data
+
+```bash
+python -m scripts.ingest_data 
+```
+   #ingested 851 chunks
+```
+http://localhost:8000/docs
+```
+
+---
+
+### 5. Start FastAPI backend
 
 ```bash
 uvicorn app.api.main:app --reload
@@ -305,7 +318,7 @@ http://localhost:8000/docs
 
 ---
 
-### 5. Start Streamlit frontend
+### 6. Start Streamlit frontend
 
 ```bash
 streamlit run streamlit_app.py

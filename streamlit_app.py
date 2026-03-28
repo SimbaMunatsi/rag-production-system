@@ -94,9 +94,9 @@ def render_sidebar() -> None:
         st.markdown("### Try asking")
 
         example_prompts = [
-           "What is the Constitution of Zimbabwe?",
+           "How do I become a Zimbabwean citizen?",
            "Under what circumstances can the President be removed from office?",
-           "When can the military be deployed?",
+           "What does the Constitution say about freedom of expression?",
         ]
 
         for prompt in example_prompts:
