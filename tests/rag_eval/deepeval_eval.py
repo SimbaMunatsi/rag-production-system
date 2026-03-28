@@ -10,9 +10,9 @@ def run_deepeval():
     rag = create_rag_pipeline()
 
     test_case = LLMTestCase(
-        input="What is Artificial Intelligence (AI)?",
-        actual_output=rag.run("What is Artificial Intelligence (AI)?")["answer"],
-        expected_output="Artificial Intelligence is the ability of machines to imitate human intelligence, specifically the cognitive problem-solving capabilities such as learning, reasoning, and creating."
+        input="What is the role of the Constitutional Court?",
+        actual_output=rag.run("What is the role of the Constitutional Court?")["answer"],
+        expected_output="The Constitutional Court is the highest court on constitutional matters."
     )
 
     metric = AnswerRelevancyMetric()

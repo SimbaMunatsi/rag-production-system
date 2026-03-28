@@ -9,6 +9,6 @@ class ContextCompressor:
             text = doc.page_content
 
             # simple truncation
-            compressed.append(text[:800])
+            compressed.append(text[:1000])
 
         return compressed

@@ -1,102 +1,194 @@
 [
+
   {
-    "question": "What is Artificial Intelligence (AI)?",
-    "ground_truth": "Artificial Intelligence is the ability of machines to imitate human intelligence, specifically the cognitive problem-solving capabilities such as learning, reasoning, and creating. [cite: 4298, 4346, 4348]",
-    "context": "Artificial intelligence, Al, which is the ability of machines to imitate human intellige nce. ... the ability of machines to imitate the cognitive problem- solving capabilities of human intelligence can be classified as Artificial Intelligence, or Al."
+    "question": "Who is the head of state in Zimbabwe?",
+    "ground_truth": "The President is the Head of State and Government.",
+    "context": "The Constitution defines the President as the Head of State and Government."
   },
   {
-    "question": "Distinguish between Machine Learning (ML) and Deep Learning (DL).",
-    "ground_truth": "Machine Learning is a subset of AI that uses algorithms to learn from past data to predict outcomes or identify trends. Deep Learning is a further subset of ML that uses multi-layered neural networks to learn from complex patterns in raw data, such as pixels in an image. [cite: 4299, 4300, 4454, 4457]",
-    "context": "Machine learning is a subset of Al, where algorithms are used to learn from past data and predict outcome on new data... deep learning, which is a further subset of machine learnin g, in which algorithms are modeled to learn from complex data using neural network s."
+    "question": "What is the role of the Constitutional Court?",
+    "ground_truth": "The Constitutional Court is the highest court on constitutional matters.",
+    "context": "The Constitution establishes the Constitutional Court to handle constitutional issues."
   },
   {
-    "question": "What is Supervised Machine Learning?",
-    "ground_truth": "Supervised machine learning is an approach where an algorithm learns from labeled data (input-output pairs) to build a model that can predict outcomes or classifications for new data. [cite: 4459, 4475, 4547]",
-    "context": "Supervised learning, where the algorithm I earns from labeled data, making predictions or classifications. ... It's learni ng from labeled data."
+    "question": "What is the role of Parliament?",
+    "ground_truth": "Parliament makes laws for peace, order, and good governance.",
+    "context": "The Constitution establishes Parliament as the legislative authority."
   },
   {
-    "question": "How does Unsupervised Machine Learning differ from Supervised Learning?",
-    "ground_truth": "Unlike supervised learning, unsupervised learning works with unlabeled data to discover hidden patterns, structures, or trends, such as grouping similar data points into clusters. [cite: 4460, 4489, 4549]",
-    "context": "Unsupervised learning is an algorithm that discovers patterns and structures in unlabeled data, such as clus tering or dimensionality reduction. ... Exploring patterns and data and grouping similar data into clusters drives unsup ervised machine learning."
+    "question": "What is citizenship in Zimbabwe based on?",
+    "ground_truth": "Citizenship can be by birth, descent, or registration.",
+    "context": "The Constitution defines citizenship categories including birth and descent."
   },
   {
-    "question": "Explain Reinforcement Learning.",
-    "ground_truth": "Reinforcement learning is a machine learning approach where an agent learns to make decisions through trial and error by interacting with an environment and receiving feedback in the form of rewards or penalties. [cite: 4461, 4493, 4694]",
-    "context": "reinforcement learning, wher e agents learn to make predictions and decisions by interacting with an environment and receiving rewards or punishments. ... a computer program I earns to make decisions by trying different actions and receiving feedback."
+    "question": "What rights are included in the Declaration of Rights?",
+    "ground_truth": "The Declaration of Rights includes freedoms such as expression, assembly, and equality.",
+    "context": "The Constitution contains a Declaration of Rights protecting civil and political liberties."
   },
   {
-    "question": "What are Neural Networks (ANN)?",
-    "ground_truth": "Artificial Neural Networks (ANN) are computational models inspired by the human brain, consisting of interconnected nodes called neurons arranged in layers (input, hidden, and output) that process information using weights and activation functions. [cite: 4504, 4789, 4790, 4795]",
-    "context": "Neural networks are like a bun ch of connected brain cells stacked together. ... Artificial neural networ ks are inspired by the human brain. They are made up of interconnected nodes calle d as neurons."
+    "question": "What is the right to education?",
+    "ground_truth": "Every person has the right to basic state-funded education.",
+    "context": "The Constitution guarantees access to education."
   },
   {
-    "question": "What is Generative AI?",
-    "ground_truth": "Generative AI is a type of AI that can create original new content, including text, images, audio, and videos, by learning underlying patterns from existing data. [cite: 4301, 4507, 4937, 4938]",
-    "context": "generative Al, which is a type of Al that can create new content. ... Generative Al, a subset of machine I earning, creates diverse content like text, audio, images, and more."
+    "question": "What is the term of office for the President?",
+    "ground_truth": "The President serves a five-year term.",
+    "context": "The Constitution sets presidential terms at five years."
   },
   {
-    "question": "Define Large Language Models (LLMs) and their 'large' component.",
-    "ground_truth": "A Large Language Model is a probabilistic model trained on massive amounts of text to predict the next word in a sequence. The term 'large' refers to the exponential number of parameters (adjustable weights), often ranging from hundreds of millions to billions. [cite: 5004, 5031, 5032, 5093]",
-    "context": "A language model is a probabilistic model of text that determines the probability of a given sequence of words occurring in a sentence based on the previous words. ... The large in the large language model refers to the number of parameters."
+    "question": "What is the judiciary responsible for?",
+    "ground_truth": "The judiciary interprets and applies the law independently.",
+    "context": "The Constitution guarantees judicial independence in administering justice."
   },
   {
-    "question": "What is the Transformer architecture and its advantage over RNNs?",
-    "ground_truth": "Transformers process data in parallel and use a self-attention mechanism to understand relationships between all words in a sentence simultaneously. This allows them to capture long-range dependencies better than Recurrent Neural Networks (RNNs), which process data sequentially and struggle with context in long sequences. [cite: 4402, 5178, 5181, 5208, 5223]",
-    "context": "transformers, which processes data in parallel. ... Transformers can look at all the words in the sentence at the same time, and underst and how they relate to each other. ... simultaneously understand the connection b etween Jane and dog, even though they are far apart in the sentence."
+    "question": "What is the supreme law of Zimbabwe?",
+    "ground_truth": "The Constitution of Zimbabwe is the supreme law of the country.",
+    "context": "The Constitution establishes itself as the supreme law and any law inconsistent with it is invalid."
   },
   {
-    "question": "Explain Tokenization and its role in LLMs.",
-    "ground_truth": "Tokenization is the process of converting words, parts of words, or punctuation into numerical tokens that a language model can understand. Simple text may average one token per word, while complex text may require two to three tokens per word. [cite: 4393, 5268, 5271, 5272, 5273]",
-    "context": "those words need to be converted to numbers for it to be used to tr ain language models. This is called tokenization. ... Large language models understand tokens rather than words."
+    "question": "What are the founding values of Zimbabwe?",
+    "ground_truth": "The founding values include supremacy of the Constitution, rule of law, and respect for human rights.",
+    "context": "The Constitution outlines founding values such as democracy, justice, and fundamental human rights."
+  },
+  
+  {
+    "question": "What values does the Preamble commit the people of Zimbabwe to build the nation upon?",
+    "ground_truth": "The Preamble states that Zimbabwe is to be built as a united, just and prosperous nation founded on values of transparency, equality, freedom, fairness, honesty and the dignity of hard work.",
+    "context": "Resolve by the tenets of this Constitution to commit ourselves to build a united, just and prosperous nation, founded on values of transparency, equality, freedom, fairness, honesty and the dignity of hard work."
   },
   {
-    "question": "What are Embeddings?",
-    "ground_truth": "Embeddings are numerical (vector) representations of text (words, sentences, or paragraphs) that capture semantic meaning, allowing computers to understand relationships and similarities between different pieces of text. [cite: 4398, 5289, 5291, 5300]",
-    "context": "We need a way to indicate that similar words or sentences may be close by. This is done through representation called embedding. ... Embeddings make it easy for computers to understand the relationship between pie ces of text."
+    "question": "How does the Constitution describe Zimbabwe in section 1?",
+    "ground_truth": "Section 1 describes Zimbabwe as a unitary, democratic and sovereign republic.",
+    "context": "Zimbabwe is a unitary, democratic and sovereign republic."
   },
   {
-    "question": "Describe Retrieval-Augmented Generation (RAG).",
-    "ground_truth": "RAG is an architecture that optimizes LLM output by first retrieving relevant information from a private knowledge base (like a vector database) and then using that retrieved content to provide grounded, informed, and accurate answers. [cite: 5347, 5596, 5622, 5638, 5639]",
-    "context": "this whole architecture is what is referred to as retrieval- augmented generation, or RAG. ... Language model can query enterprise knowledge bases ... to provide grounded response."
+    "question": "What does section 2 say about the supremacy of the Constitution?",
+    "ground_truth": "Section 2 states that the Constitution is the supreme law of Zimbabwe, and any law, practice, custom or conduct inconsistent with it is invalid to the extent of the inconsistency.",
+    "context": "This Constitution is the supreme law of Zimbabwe and any law, practice, custom or conduct inconsistent with it is invalid to the extent of the inconsistency."
   },
   {
-    "question": "What is Prompt Engineering?",
-    "ground_truth": "Prompt engineering is the iterative process of refining the input text (prompt) provided to an LLM to elicit a specific style, quality, or accuracy of response. [cite: 5422, 5431, 5588]",
-    "context": "Prompt engineering is the process of iteratively refining a prompt for the purpose of eliciting a particular style of response."
+    "question": "Name some of the founding values and principles of Zimbabwe in section 3.",
+    "ground_truth": "Section 3 says Zimbabwe is founded on values and principles such as supremacy of the Constitution, the rule of law, fundamental human rights and freedoms, recognition of human dignity and worth, equality of all human beings, gender equality, good governance, and recognition of and respect for the liberation struggle.",
+    "context": "Zimbabwe is founded on respect for the following values and principles— supremacy of the Constitution; the rule of law; fundamental human rights and freedoms; recognition of the inherent dignity and worth of each human being; recognition of the equality of all human beings; gender equality; good governance; and recognition of and respect for the liberation struggle."
   },
   {
-    "question": "What is AI Hallucination and how can it be mitigated?",
-    "ground_truth": "AI hallucination occurs when a model generates non-factual or ungrounded text that is not supported by the data it was exposed to. While there is no perfect method to stop it, techniques like retrieval-augmentation (RAG) can help reduce hallucinations by grounding answers in data. [cite: 5551, 5555, 5562, 5571]",
-    "context": "hall ucination is basically means the model generated text that is non- factual and ungrounded. ... retrieval augmented systems hallucinate less than 0- shot LLMs."
+    "question": "What are the tiers of government in Zimbabwe?",
+    "ground_truth": "Section 5 provides three tiers of government: the national Government, provincial and metropolitan councils, and local authorities.",
+    "context": "The tiers of government in Zimbabwe are— (a) the national Government; (b) provincial and metropolitan councils; and (c) local authorities."
   },
   {
-    "question": "Explain the OCI Language service.",
-    "ground_truth": "OCI Language is a pre-trained service for sophisticated text analysis including language detection, sentiment analysis (per aspect and sentence), key phrase extraction, text classification into 600 categories, and named entity recognition. [cite: 5831, 4189, 4194, 4196]",
-    "context": "OCR Language allows you to perform sophisticated text analysis at scale. ... Detects the language of your text Identifies entities in text Identifies sentiment for each aspect of text Identifies key phrases ... Classifies general topic from list of 600 categories."
+    "question": "Which languages are officially recognised in Zimbabwe under section 6?",
+    "ground_truth": "Section 6 recognises Chewa, Chibarwe, English, Kalanga, Koisan, Nambya, Ndau, Ndebele, Shangani, Shona, sign language, Sotho, Tonga, Tswana, Venda and Xhosa as the officially recognised languages of Zimbabwe.",
+    "context": "The following languages, namely Chewa, Chibarwe, English, Kalanga, Koisan, Nambya, Ndau, Ndebele, Shangani, Shona, sign language, Sotho, Tonga, Tswana, Venda and Xhosa, are the officially recognised languages of Zimbabwe."
   },
   {
-    "question": "What are the capabilities of OCI Vision?",
-    "ground_truth": "OCI Vision provides image analysis (object detection and image classification) and Document AI (text recognition/OCR, document classification, table extraction, and key-value extraction from documents like receipts). [cite: 4216, 4217, 4223, 4225, 4230]",
-    "context": "OCI Vision: Image Analysis Object Detection ... Image Classification ... Document AI Text Recognition ... Document classification ... Table Extraction ... Key Value Extraction."
+    "question": "How must the State promote public awareness of the Constitution?",
+    "ground_truth": "Section 7 says the State must promote public awareness by translating the Constitution into all officially recognised languages and disseminating it widely, requiring it to be taught in schools and training curricula, and encouraging people and organisations to spread constitutional awareness throughout society.",
+    "context": "The State must promote public awareness of this Constitution, in particular by— (a) translating it into all officially recognised languages and disseminating it as widely as possible; (b) requiring this Constitution to be taught in schools and as part of the curricula for the training of members of the security services, the Civil Service and members and employees of public institutions; and (c) encouraging all persons and organisations, including civic organisations, to disseminate awareness and knowledge of this Constitution throughout society."
   },
   {
-    "question": "What is OCI Select AI?",
-    "ground_truth": "Select AI is a feature of Oracle Autonomous Database that allows users to query data using natural language. It translates natural language questions into SQL queries by interacting with an LLM and understanding the database metadata. [cite: 4022, 4142, 4146, 4160, 4167]",
-    "context": "lever age the Oracle Autonomous Database with large language models to an alyze our data and return results through SQL queries just by asking and using natura I language. ... Select Al takes the question in natural language and translat es into SQL language."
+    "question": "What does section 9 require regarding good governance?",
+    "ground_truth": "Section 9 requires the State to adopt and implement policies and legislation that develop efficiency, competence, accountability, transparency, personal integrity and financial probity in all public institutions, with appointments made primarily on merit and measures taken to combat corruption and abuse of power.",
+    "context": "The State must adopt and implement policies and legislation to develop efficiency, competence, accountability, transparency, personal integrity and financial probity in all institutions and agencies of government at every level and in every public institution; appointments to public offices must be made primarily on the basis of merit; and measures must be taken to expose, combat and eradicate all forms of corruption and abuse of power."
   },
   {
-    "question": "Identify the principles of Responsible AI.",
-    "ground_truth": "Responsible AI principles include: Human Autonomy (human-centric design and oversight), Prevention of Harm (safety and security), Fairness (lack of bias and discrimination), and Explicability (transparency and explainability of decisions). [cite: 3982, 3998, 3999, 4004, 4006]",
-    "context": "Guiding principles for AI to be trustworthy ... Respect for human autonomy Prevention of harm Fairness Explicability ... Human centric and allow human oversight ... Technical robustness and safety ... Privacy and data governance Transparency ... Accountability."
+    "question": "What does the Constitution say about national development?",
+    "ground_truth": "Section 13 says the State must endeavour to facilitate rapid and equitable development, promote private initiative and self-reliance, foster agricultural, commercial, industrial, technological and scientific development, empower citizens through enterprises, ensure balanced rural and urban development, involve people in development plans, promote equal opportunities in development, and ensure local communities benefit from resources in their areas.",
+    "context": "The State and all institutions and agencies of government at every level must endeavour to facilitate rapid and equitable development... promote private initiative and self-reliance... foster agricultural, commercial, industrial, technological and scientific development... bring about balanced development... involve the people in the formulation and implementation of development plans... protect and enhance the right of the people, particularly women, to equal opportunities in development... and ensure that local communities benefit from the resources in their areas."
   },
   {
-    "question": "Why are GPUs essential for AI infrastructure?",
-    "ground_truth": "GPUs are essential because they use parallel computing with thousands of cores to perform repetitive, simple calculations rapidly. This allows them to crunch through massive datasets for model training and inference with much higher throughput than CPUs. [cite: 3915, 3917, 3919, 3923, 3925]",
-    "context": "Graphics Processing Unit, or GPU, is a very important component of Al infrastructure. ... Machine learning and Al workloa ds need lots of repetitive calculations ... Parallel computing on GPUs is designed to run many processes at the same time."
+    "question": "What measures must the State take for food security?",
+    "ground_truth": "Section 15 requires the State to encourage people to grow and store adequate food, secure adequate food reserves, and encourage and promote proper nutrition through mass education and other appropriate means.",
+    "context": "The State must— (a) encourage people to grow and store adequate food; (b) secure the establishment of adequate food reserves; and (c) encourage and promote adequate and proper nutrition through mass education and other appropriate means."
   },
   {
-    "question": "When should Fine-tuning be used instead of Prompt Engineering?",
-    "ground_truth": "Fine-tuning is recommended when a pre-trained model does not perform well on a specific task, when the model needs to learn new skills or a unique domain-specific style, or when the data required for context is too large for a prompt. [cite: 5590, 5662, 5678, 5713]",
-    "context": "Fine-tuning is needed when your LLM does not perform well on a particular task and the data required might be too large. ... Recommended when a pretrained model doesn't perform your task well or when you want to teach it something new."
+    "question": "What does section 17 say about gender balance?",
+    "ground_truth": "Section 17 says the State must promote full gender balance in Zimbabwean society and must take all measures, including legislative measures, to ensure that both genders are equally represented in all institutions and agencies of government at every level.",
+    "context": "The State must promote full gender balance in Zimbabwean society, and in particular the State must promote the full participation of women in all spheres of Zimbabwean society on the basis of equality with men, and must take all measures, including legislative measures, needed to ensure that both genders are equally represented in all institutions and agencies of government at every level."
+  },
+  {
+    "question": "What rights of young people are recognised in section 20?",
+    "ground_truth": "Section 20 recognises that young people must have access to education and training, opportunities for employment and economic empowerment, opportunities for recreational activities and access to facilities, and protection from harmful cultural practices, exploitation and all forms of abuse.",
+    "context": "Young people... must be afforded opportunities for employment and other avenues to economic empowerment; have opportunities for recreational activities and access to recreational facilities; and are protected from harmful cultural practices, exploitation and all forms of abuse."
+  },
+  {
+    "question": "How does the Constitution protect persons with disabilities?",
+    "ground_truth": "Section 22 says the State must recognise the rights of persons with disabilities, treat them with respect and dignity, assist them to achieve their full potential, develop welfare and work programmes, prioritise their needs in development plans, encourage suitable communication methods, foster social organisations for their quality of life, and ensure public buildings and amenities are accessible to them.",
+    "context": "The State... must recognise the rights of persons with physical or mental disabilities, in particular their right to be treated with respect and dignity... assist persons with physical or mental disabilities to achieve their full potential... develop programmes for their welfare... consider their requirements as one of the priorities in development plans... encourage forms of communication suitable for them... and ensure that buildings and amenities to which the public has access are accessible to persons with disabilities."
+  },
+  {
+    "question": "What does section 26 require concerning marriage?",
+    "ground_truth": "Section 26 requires the State to ensure that no marriage is entered into without the free and full consent of the intending spouses, that children are not pledged in marriage, that spouses have equality of rights and obligations during marriage and at its dissolution, and that children and spouses are protected when a marriage ends.",
+    "context": "The State must take appropriate measures to ensure that— (a) no marriage is entered into without the free and full consent of the intending spouses; (b) children are not pledged in marriage; (c) there is equality of rights and obligations of spouses during marriage and at its dissolution; and (d) in the event of dissolution of a marriage... provision is made for the necessary protection of any children and spouses."
+  },
+  {
+    "question": "What does section 27 say about education?",
+    "ground_truth": "Section 27 says the State must take all practical measures to promote free and compulsory basic education for children and higher and tertiary education, and must ensure that girls are afforded the same opportunities as boys to obtain education at all levels.",
+    "context": "The State must take all practical measures to promote— (a) free and compulsory basic education for children; and (b) higher and tertiary education... The State must take measures to ensure that girls are afforded the same opportunities as boys to obtain education at all levels."
+  },
+  {
+    "question": "Who is a Zimbabwean citizen under section 35?",
+    "ground_truth": "Section 35 says persons are Zimbabwean citizens by birth, descent or registration, and that all citizens are equally entitled to the rights, privileges and benefits of citizenship and equally subject to its duties and obligations.",
+    "context": "Persons are Zimbabwean citizens by birth, descent or registration. All Zimbabwean citizens are equally entitled to the rights, privileges and benefits of citizenship and are equally subject to the duties and obligations of citizenship."
+  },
+  {
+    "question": "When is a person a Zimbabwean citizen by birth?",
+    "ground_truth": "Section 36 says a person is a Zimbabwean citizen by birth if they were born in Zimbabwe and either parent was a Zimbabwean citizen or any grandparent was a Zimbabwean citizen by birth or descent. It also covers certain persons born outside Zimbabwe to Zimbabwean parents, and a child found in Zimbabwe under fifteen whose nationality and parents are unknown is presumed to be a citizen by birth.",
+    "context": "Persons are Zimbabwean citizens by birth if they were born in Zimbabwe and, when they were born— (a) either their mother or father was a Zimbabwean citizen; or (b) any of their grandparents was a Zimbabwean citizen by birth or descent... Persons born outside Zimbabwe are Zimbabwean citizens by birth if... either of their parents was a Zimbabwean citizen... A child found in Zimbabwe who is, or appears to be, less than fifteen years of age, and whose nationality and parents are not known, is presumed to be a Zimbabwean citizen by birth."
+  },
+  {
+    "question": "What does section 44 say about the duty to respect fundamental human rights and freedoms?",
+    "ground_truth": "Section 44 states that the State, every person, and every institution and agency of government at every level must respect, protect, promote and fulfil the rights and freedoms set out in Chapter 4.",
+    "context": "The State and every person, including juristic persons, and every institution and agency of the government at every level must respect, protect, promote and fulfil the rights and freedoms set out in this Chapter."
+  },
+  {
+    "question": "What limitations does the Constitution place on the death penalty?",
+    "ground_truth": "Section 48 says the death penalty may be imposed only for murder committed in aggravating circumstances, the court must have discretion whether to impose it, it may be carried out only under a final judgment of a competent court, it cannot be imposed on a person who was under twenty-one when the offence was committed or who is over seventy, and it must not be imposed or carried out on a woman.",
+    "context": "A law may permit the death penalty to be imposed only on a person convicted of murder committed in aggravating circumstances... the law must permit the court a discretion whether or not to impose the penalty... the penalty may be carried out only in accordance with a final judgment of a competent court... the penalty must not be imposed on a person who was less than twenty-one years old when the offence was committed or who is more than seventy years old... and must not be imposed or carried out on a woman."
+  },
+  {
+    "question": "What rights does an arrested person have under section 50?",
+    "ground_truth": "Section 50 gives arrested persons rights including being informed promptly of the reason for arrest, being allowed without delay to contact a spouse, relative or legal practitioner, consulting private legal and medical practitioners, being treated humanely and with respect for dignity, being released unless there are compelling reasons for detention, and being brought before a court within forty-eight hours if not released.",
+    "context": "Any person who is arrested must be informed at the time of arrest of the reason for the arrest; must be permitted, without delay, to contact their spouse or partner, a relative or legal practitioner, or anyone else of their choice; must be treated humanely and with respect for their inherent dignity; must be released unconditionally or on reasonable conditions unless there are compelling reasons justifying continued detention... and any person not released must be brought before a court as soon as possible and not later than forty-eight hours after the arrest."
+  },
+  {
+    "question": "What does section 56 say about equality and non-discrimination?",
+    "ground_truth": "Section 56 says all persons are equal before the law and have the right to equal protection and benefit of the law. Women and men have the right to equal treatment and equal opportunities, and every person has the right not to be unfairly discriminated against on grounds such as nationality, race, tribe, place of birth, ethnic or social origin, language, religion, political affiliation, sex, gender, marital status, age, pregnancy, disability or economic or social status.",
+    "context": "All persons are equal before the law and have the right to equal protection and benefit of the law. Women and men have the right to equal treatment, including the right to equal opportunities in political, economic, cultural and social spheres. Every person has the right not to be treated in an unfairly discriminatory manner on such grounds as their nationality, race, colour, tribe, place of birth, ethnic or social origin, language, class, religious belief, political affiliation, opinion, custom, culture, sex, gender, marital status, age, pregnancy, disability or economic or social status."
+  },
+  {
+    "question": "What is included in the right to privacy under section 57?",
+    "ground_truth": "Section 57 says the right to privacy includes protection against entry into one's home, premises or property without permission, searches, seizure of possessions, infringement of private communications, and disclosure of a person's health condition.",
+    "context": "Every person has the right to privacy, which includes the right not to have— (a) their home, premises or property entered without their permission; (b) their person, home, premises or property searched; (c) their possessions seized; (d) the privacy of their communications infringed; or (e) their health condition disclosed."
+  },
+  {
+    "question": "What does section 61 say about freedom of expression and freedom of the media?",
+    "ground_truth": "Section 61 says every person has the right to freedom of expression, including seeking, receiving and communicating ideas and information, artistic expression, scientific research, creativity and academic freedom. It also protects freedom of the media, but excludes incitement to violence, advocacy of hatred or hate speech, malicious injury to reputation or dignity, and malicious or unwarranted breaches of privacy.",
+    "context": "Every person has the right to freedom of expression, which includes freedom to seek, receive and communicate ideas and other information; freedom of artistic expression and scientific research and creativity; and academic freedom. Every person is entitled to freedom of the media... Freedom of expression and freedom of the media exclude incitement to violence, advocacy of hatred or hate speech, malicious injury to a person's reputation or dignity, or malicious or unwarranted breach of a person's right to privacy."
+  },
+  {
+    "question": "Who has the right of access to information under section 62?",
+    "ground_truth": "Section 62 gives every Zimbabwean citizen or permanent resident, including juristic persons and the Zimbabwean media, the right to information held by the State where it is needed for public accountability. It also gives every person a right of access to information held by anyone, including the State, where it is required for the exercise or protection of a right.",
+    "context": "Every Zimbabwean citizen or permanent resident, including juristic persons and the Zimbabwean media, has the right of access to any information held by the State... in the interests of public accountability. Every person... has the right of access to any information held by any person, including the State, in so far as the information is required for the exercise or protection of a right."
+  },
+  {
+    "question": "What labour rights are protected in section 65?",
+    "ground_truth": "Section 65 protects the right to fair and safe labour practices, a fair and reasonable wage, the right to form and join trade unions, participate in lawful union activities, engage in collective job action including the right to strike, just and satisfactory conditions of work, collective bargaining, equal remuneration for similar work, and fully paid maternity leave for women employees of at least three months.",
+    "context": "Every person has the right to fair and safe labour practices and standards and to be paid a fair and reasonable wage... every person has the right to form and join trade unions... every employee has the right to participate in collective job action, including the right to strike... Every employee is entitled to just, equitable and satisfactory conditions of work... Women and men have a right to equal remuneration for similar work. Women employees have a right to fully paid maternity leave for a period of at least three months."
+  },
+  {
+    "question": "What political rights are guaranteed to Zimbabwean citizens under section 67?",
+    "ground_truth": "Section 67 guarantees Zimbabwean citizens the right to free, fair and regular elections, to make political choices freely, to form and join political parties, to campaign freely and peacefully, to participate in peaceful political activity, to vote in elections and referendums in secret once they are eighteen or older, and to stand for public office and hold it if elected.",
+    "context": "Every Zimbabwean citizen has the right to free, fair and regular elections... and to make political choices freely... to form, to join and to participate in the activities of a political party... to campaign freely and peacefully... to participate in peaceful political activity... and every citizen who is of or over eighteen years of age has the right to vote in all elections and referendums, and to do so in secret, and to stand for election for public office and, if elected, to hold such office."
+  },
+  {
+    "question": "What does section 68 provide about administrative justice?",
+    "ground_truth": "Section 68 provides that every person has a right to administrative conduct that is lawful, prompt, efficient, reasonable, proportionate, impartial, and both substantively and procedurally fair, and that anyone adversely affected has the right to prompt written reasons.",
+    "context": "Every person has a right to administrative conduct that is lawful, prompt, efficient, reasonable, proportionate, impartial and both substantively and procedurally fair. Any person whose right, freedom, interest or legitimate expectation has been adversely affected by administrative conduct has the right to be given promptly and in writing the reasons for the conduct."
+  },
+  {
+    "question": "What does section 69 say about the right to a fair hearing?",
+    "ground_truth": "Section 69 says every person accused of an offence has the right to a fair and public trial within a reasonable time before an independent and impartial court, and in civil matters every person has a right to a fair, speedy and public hearing within a reasonable time before an independent and impartial court, tribunal or forum established by law.",
+    "context": "Every person accused of an offence has the right to a fair and public trial within a reasonable time before an independent and impartial court. In the determination of civil rights and obligations, every person has a right to a fair, speedy and public hearing within a reasonable time before an independent and impartial court, tribunal or other forum established by law."
   }
 ]
