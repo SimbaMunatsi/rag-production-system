@@ -190,7 +190,7 @@ This flow ensures that responses are grounded in retrieved constitutional eviden
 
 The Streamlit interface provides a clean chat-style experience for constitutional question answering. It includes suggested prompts, conversational interaction, and a simple entry point for non-technical users.
 
-![Bumbiro Streamlit Interface](assets/ui/streamlit-interface.png)
+![Bumbiro Streamlit Interface](assets/ui/streamlit-ui.png)
 
 ### Answer with Sources
 
@@ -202,13 +202,13 @@ A core design goal of Bumbiro is explainability. The assistant returns both the 
 
 Bumbiro is validated like an engineered system, not just a front-end demo. The project includes tests across retrieval, generation, guardrails, and API behavior.
 
-![Pytest Results](assets/tests/pytest-results.png)
+![Pytest Results](assets/tests/pytest.png)
 
 ### Evaluation Results
 
 The project also includes LLM evaluation workflows to measure answer quality, grounding, and retrieval performance.
 
-![RAGAS Evaluation Results](assets/tests/ragas-eval-results.png)
+![RAGAS Evaluation Results](assets/tests/ragas-results.png)
 
 ---
 
