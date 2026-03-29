@@ -277,7 +277,7 @@ Used to verify backend availability and service health.
 ## Project Structure
 
 ```text
-bumbiro-ai-system/
+rag-production-system/
 │
 ├── app/
 │   ├── api/
@@ -375,8 +375,8 @@ bumbiro-ai-system/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/SimbaMunatsi/bumbiro-ai-system.git
-cd bumbiro-ai-system
+git clone https://github.com/SimbaMunatsi/rag-production-system.git
+cd rag-production-system
 ```
 
 ### 2. Create and activate virtual environment
