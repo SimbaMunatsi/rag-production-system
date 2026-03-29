@@ -381,7 +381,7 @@ cd rag-production-system
 
 ### 2. Create and activate virtual environment
 
-## windows
+### windows
 ```bash
 python -m venv .venv
 ```
@@ -390,7 +390,7 @@ python -m venv .venv
 .venv\Scripts\activate
 ```
 
-## linux
+### linux
 ```bash
 python3 -m venv .venv
 ```
