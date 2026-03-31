@@ -16,6 +16,7 @@
 
 ## Table of Contents
 
+* [Bumbiro Demo Video](#bumbiro-demo-video)
 * [Overview](#overview)
 * [Why Bumbiro Exists](#why-bumbiro-exists)
 * [What This System Does](#what-this-system-does)
@@ -33,7 +34,7 @@
 * [Author](#author)
 
 ---
-## Demo
+## Bumbiro Demo Video
 
 A short walkthrough of Bumbiro AI showing retrieval-augmented constitutional question answering, grounded responses, and source-backed output. 
 https://youtu.be/ZFCZWftT4Qk
