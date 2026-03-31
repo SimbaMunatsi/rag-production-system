@@ -35,7 +35,8 @@
 ---
 ## Demo
 
-A short walkthrough of Bumbiro AI showing retrieval-augmented constitutional question answering, grounded responses, and source-backed output.
+A short walkthrough of Bumbiro AI showing retrieval-augmented constitutional question answering, grounded responses, and source-backed output. 
+https://youtu.be/ZFCZWftT4Qk
 
 [![Watch the Bumbiro AI demo](assets/video/bumbiro-thumbnail.png)](https://youtu.be/ZFCZWftT4Qk)
 ---
