@@ -25,6 +25,7 @@
 * [RAG Pipeline Flow](#rag-pipeline-flow)
 * [Screenshots](#screenshots)
 * [Testing and Evaluation](#testing-and-evaluation)
+* [Observability](#observability)
 * [API Endpoints](#api-endpoints)
 * [Project Structure](#project-structure)
 * [Getting Started](#getting-started)
@@ -254,6 +255,25 @@ This matters because an LLM system can appear fluent while still being wrong. Bu
 
 ---
 
+## Observability
+
+## 🔍 Observability with LangSmith
+
+Bumbiro AI includes production-style observability powered by LangSmith for end-to-end tracing, debugging, and performance monitoring across the retrieval-augmented generation pipeline.
+
+LangSmith traces capture:
+- query lifecycle from Streamlit UI to FastAPI backend
+- retriever calls against ChromaDB
+- prompt construction and context assembly
+- LLM response generation
+- latency and failure points
+- source grounding verification
+
+This observability layer significantly improved debugging speed during retrieval failures, empty-context issues, and response quality tuning, making Bumbiro AI more reliable and production-ready.
+
+![Langsmith observation and monitoring](assets/monitoring/observability.png)
+---
+
 ## API Endpoints
 
 ### Query
@@ -444,7 +464,7 @@ Swagger UI:
 http://localhost:8000/docs
 ```
 
-### 6. Start the Streamlit Frontend
+### 7. Start the Streamlit Frontend
 
 ```bash
 streamlit run streamlit_app.py
