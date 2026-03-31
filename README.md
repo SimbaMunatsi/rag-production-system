@@ -413,7 +413,7 @@ Create a `.env` file in the project root:
 OPENAI_API_KEY=your_api_key
 export LANGSMITH_API_KEY=your_langsmith_key
 export LANGSMITH_TRACING=true
-export LANGSMITH_PROJECT=your_project_name
+export LANGSMITH_PROJECT=rag-production-system
 export LANGSMITH_ENDPOINT=your_langsmith_endpoint
 CHROMA_DB_PATH=./data/embeddings
 ```
