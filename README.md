@@ -517,7 +517,16 @@ That makes Bumbiro a stronger portfolio project for AI engineering, backend engi
 
 ## Author
 
-**Simbarashe Munatsi**
+**Victor Simbarashe Munatsi**
+
+### Contacts
+Email : vsmunatsi@gmai.com
+LinkedIn : https://www.linkedin.com/in/victor-simbarashe-munatsi/
+
+## License
+
+This project is licensed under the **MIT License**. See the `LICENSE` file for details.
+
 
 ---
 
