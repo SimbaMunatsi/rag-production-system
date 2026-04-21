@@ -1,0 +1,40 @@
+# Git
+.git
+.gitignore
+
+# Node
+node_modules
+npm-debug.log
+yarn.lock
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+env/
+
+# Logs
+*.log
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Docker
+Dockerfile*
+docker-compose.yml
+
+# Build / cache
+dist/
+build/
+.cache/
+
+# IDE
+.vscode/
+.idea/
+
+# Env files
+.env
+.env.*
