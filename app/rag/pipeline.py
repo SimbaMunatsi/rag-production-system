@@ -1,5 +1,4 @@
 class RAGPipeline:
-
     def __init__(
         self,
         retriever,
@@ -22,7 +21,7 @@ class RAGPipeline:
         self.guardrails = guardrails
         self.query_rewriter = query_rewriter
 
-    def run(self, query, session_id):
+    async def run(self, query, session_id):
         memory = self.memory_getter(session_id)
 
         safe_query = self.guardrails.validate_input(query)
@@ -33,15 +32,15 @@ class RAGPipeline:
             memory=memory_context
         )
 
-        docs = self.retriever.retrieve(standalone_query)
+        # Await the hybrid async retrieval
+        docs = await self.retriever.retrieve(standalone_query)
+        
+        # CPU-bound reranking
         docs = self.reranker.rerank(standalone_query, docs)
 
         if not docs:
             return {
-                "answer": (
-                    "I could not find enough relevant support in the Zimbabwe Constitution "
-                    "to answer that confidently."
-                ),
+                "answer": "I could not find enough relevant support in the Zimbabwe Constitution to answer that confidently.",
                 "sources": []
             }
 
@@ -53,22 +52,14 @@ class RAGPipeline:
                 [doc.page_content for doc in docs if hasattr(doc, "page_content")]
             ).strip()
 
-        if not context_text:
-            return {
-                "answer": (
-                    "I could not find enough relevant support in the Zimbabwe Constitution "
-                    "to answer that confidently."
-                ),
-                "sources": []
-            }
-
         prompt = self.prompt_builder.build(
             query=standalone_query,
             context=context_text,
             memory=memory_context
         )
 
-        answer = self.generator.generate(prompt)
+        # Await the async LLM generation
+        answer = await self.generator.generate(prompt)
         safe_answer = self.guardrails.validate_output(standalone_query, answer)
 
         memory.update(safe_query, safe_answer)
