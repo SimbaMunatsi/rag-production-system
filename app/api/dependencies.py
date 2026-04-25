@@ -1,3 +1,5 @@
+import os
+import pickle
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
@@ -11,20 +13,38 @@ from app.core.security import SECRET_KEY, ALGORITHM
 from app.models.user import User
 
 _rag_pipeline = None
+# Define a path to save the cached BM25 index
+CACHE_FILE_PATH = "data/bm25_cache.pkl"
 
 def get_rag_pipeline():
     global _rag_pipeline
     if _rag_pipeline is None:
-        print("Initializing RAG Pipeline and building BM25 in-memory index...")
-        loader = DocumentLoader("data/raw")
-        raw_docs = loader.load()
-        cleaner = DocumentCleaner()
-        corpus_documents = cleaner.clean(raw_docs)
+        print("Initializing RAG Pipeline...")
+        
+        # --- THE FIX: Check for a cached index on the hard drive ---
+        if os.path.exists(CACHE_FILE_PATH):
+            print("Loading BM25 index from disk cache (Lightning Fast)...")
+            with open(CACHE_FILE_PATH, "rb") as f:
+                corpus_documents = pickle.load(f)
+        else:
+            print("No cache found. Building BM25 index from raw files (Slow)...")
+            loader = DocumentLoader("data/raw")
+            raw_docs = loader.load()
+            cleaner = DocumentCleaner()
+            corpus_documents = cleaner.clean(raw_docs)
+            
+            # Save the cleaned, processed documents to disk for next time
+            os.makedirs(os.path.dirname(CACHE_FILE_PATH), exist_ok=True)
+            with open(CACHE_FILE_PATH, "wb") as f:
+                pickle.dump(corpus_documents, f)
+            print("Saved BM25 index to disk cache for future reboots.")
+
         _rag_pipeline = create_rag_pipeline(corpus_documents=corpus_documents)
         print("Pipeline successfully initialized!")
+        
     return _rag_pipeline
 
-# --- NEW: The Security Lock ---
+# --- Security Lock ---
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
 def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
