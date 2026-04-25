@@ -17,47 +17,88 @@ DEFAULT_API_URL = os.getenv("FASTAPI_BACKEND_URL", "http://localhost:8000").rstr
 
 
 def init_session_state() -> None:
+    # --- Auth States ---
+    if "is_authenticated" not in st.session_state:
+        st.session_state.is_authenticated = False
+    if "access_token" not in st.session_state:
+        st.session_state.access_token = None
+
+    # --- Chat States ---
     if "messages" not in st.session_state:
         st.session_state.messages = []
-
     if "session_id" not in st.session_state:
         st.session_state.session_id = str(uuid.uuid4())
-
     if "api_url" not in st.session_state:
         st.session_state.api_url = DEFAULT_API_URL
-
     if "show_sources" not in st.session_state:
         st.session_state.show_sources = True
-
     if "backend_status" not in st.session_state:
         st.session_state.backend_status = None
-
     if "pending_prompt" not in st.session_state:
         st.session_state.pending_prompt = None
 
 
-def check_backend(api_url: str) -> tuple[bool, str]:
+# --- Authentication API Calls ---
+def api_register(api_url: str, email: str, password: str) -> tuple[bool, str]:
     try:
-        response = requests.get(f"{api_url}/health", timeout=10)
-        response.raise_for_status()
-        return True, "Connected"
-    except requests.exceptions.RequestException as exc:
-        return False, f"Unavailable: {exc}"
+        response = requests.post(
+            f"{api_url}/auth/register",
+            json={"email": email, "password": password},
+            timeout=10,
+        )
+        if response.status_code == 200:
+            return True, "Registration successful! You can now log in."
+        else:
+            return False, response.json().get("detail", "Registration failed.")
+    except Exception as e:
+        return False, f"Connection error: {e}"
 
 
-def call_query_api(api_url: str, query: str, session_id: str) -> dict[str, Any]:
+def api_login(api_url: str, email: str, password: str) -> tuple[bool, str]:
+    try:
+        # OAuth2 strictly requires form data with 'username' and 'password'
+        response = requests.post(
+            f"{api_url}/auth/login",
+            data={"username": email, "password": password},
+            timeout=10,
+        )
+        if response.status_code == 200:
+            token = response.json().get("access_token")
+            st.session_state.access_token = token
+            st.session_state.is_authenticated = True
+            return True, "Login successful!"
+        else:
+            return False, response.json().get("detail", "Invalid credentials.")
+    except Exception as e:
+        return False, f"Connection error: {e}"
+
+
+def logout() -> None:
+    st.session_state.is_authenticated = False
+    st.session_state.access_token = None
+    st.session_state.messages = []
+    st.session_state.session_id = str(uuid.uuid4())
+
+
+# --- Chat API Call ---
+def call_query_api(api_url: str, query: str, session_id: str, token: str) -> dict[str, Any]:
+    headers = {"Authorization": f"Bearer {token}"}
     response = requests.post(
         f"{api_url}/query",
-        json={
-            "query": query,
-            "session_id": session_id,
-        },
+        json={"query": query, "session_id": session_id},
+        headers=headers,
         timeout=120,
     )
+    if response.status_code == 401:
+        # Token expired or invalid
+        logout()
+        st.rerun()
+        
     response.raise_for_status()
     return response.json()
 
 
+# --- UI Components ---
 def clear_chat() -> None:
     st.session_state.messages = []
 
@@ -69,6 +110,56 @@ def new_chat() -> None:
 
 def queue_prompt(prompt: str) -> None:
     st.session_state.pending_prompt = prompt
+
+
+def render_auth_page() -> None:
+    st.markdown(
+        """
+        <div style='text-align: center; margin-top: 50px;'>
+            <h1 style='font-size: 3rem;'>⚖️ BUMBIRO AI</h1>
+            <p style='color: #9aa0a6; font-size: 1.2rem;'>Secure login required to access the Zimbabwe Constitution AI.</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        tab1, tab2 = st.tabs(["Login", "Register"])
+
+        with tab1:
+            with st.form("login_form"):
+                login_email = st.text_input("Email")
+                login_password = st.text_input("Password", type="password")
+                login_submitted = st.form_submit_button("Log In", use_container_width=True)
+
+                if login_submitted:
+                    if not login_email or not login_password:
+                        st.error("Please fill in both fields.")
+                    else:
+                        with st.spinner("Authenticating..."):
+                            success, msg = api_login(st.session_state.api_url, login_email, login_password)
+                            if success:
+                                st.rerun()
+                            else:
+                                st.error(msg)
+
+        with tab2:
+            with st.form("register_form"):
+                reg_email = st.text_input("Email ")
+                reg_password = st.text_input("Password ", type="password")
+                reg_submitted = st.form_submit_button("Register", use_container_width=True)
+
+                if reg_submitted:
+                    if not reg_email or not reg_password:
+                        st.error("Please fill in both fields.")
+                    else:
+                        with st.spinner("Creating account..."):
+                            success, msg = api_register(st.session_state.api_url, reg_email, reg_password)
+                            if success:
+                                st.success(msg)
+                            else:
+                                st.error(msg)
 
 
 def render_sidebar() -> None:
@@ -84,7 +175,6 @@ def render_sidebar() -> None:
             st.rerun()
 
         st.markdown("### Preferences")
-
         st.session_state.show_sources = st.toggle(
             "Show sources",
             value=st.session_state.show_sources,
@@ -92,17 +182,20 @@ def render_sidebar() -> None:
 
         st.markdown("---")
         st.markdown("### Try asking")
-
         example_prompts = [
            "How do I become a Zimbabwean citizen?",
            "Under what circumstances can the President be removed from office?",
            "What does the Constitution say about freedom of expression?",
         ]
-
         for prompt in example_prompts:
             if st.button(prompt, use_container_width=True):
                 queue_prompt(prompt)
                 st.rerun()
+
+        st.markdown("---")
+        if st.button("🚪 Logout", use_container_width=True):
+            logout()
+            st.rerun()
 
 
 def render_header() -> None:
@@ -207,6 +300,7 @@ def handle_query(user_query: str) -> None:
                     api_url=st.session_state.api_url,
                     query=user_query,
                     session_id=st.session_state.session_id,
+                    token=st.session_state.access_token, # Send the auth token
                 )
 
             answer = str(result.get("answer", "")).strip()
@@ -232,48 +326,28 @@ def handle_query(user_query: str) -> None:
         except requests.exceptions.HTTPError as exc:
             error_message = f"API error: {exc}"
             response_placeholder.error(error_message)
-
-            if exc.response is not None:
-                try:
-                    st.json(exc.response.json())
-                except Exception:
-                    st.code(exc.response.text)
-
-            st.session_state.messages.append(
-                {
-                    "role": "assistant",
-                    "content": error_message,
-                    "sources": [],
-                }
-            )
+            st.session_state.messages.append({"role": "assistant", "content": error_message, "sources": []})
 
         except requests.exceptions.RequestException as exc:
             error_message = f"Connection error: {exc}"
             response_placeholder.error(error_message)
-
-            st.session_state.messages.append(
-                {
-                    "role": "assistant",
-                    "content": error_message,
-                    "sources": [],
-                }
-            )
+            st.session_state.messages.append({"role": "assistant", "content": error_message, "sources": []})
 
         except Exception as exc:
             error_message = f"Unexpected error: {exc}"
             response_placeholder.error(error_message)
-
-            st.session_state.messages.append(
-                {
-                    "role": "assistant",
-                    "content": error_message,
-                    "sources": [],
-                }
-            )
+            st.session_state.messages.append({"role": "assistant", "content": error_message, "sources": []})
 
 
 def main() -> None:
     init_session_state()
+
+    # The Gatekeeper: Route users to Login if not authenticated
+    if not st.session_state.is_authenticated:
+        render_auth_page()
+        return
+
+    # User is authenticated, render the main app
     render_sidebar()
     render_header()
 
@@ -288,7 +362,7 @@ def main() -> None:
         handle_query(queued_prompt)
         st.rerun()
 
-    user_query = st.chat_input("Message RAG Assistant")
+    user_query = st.chat_input("Message BumbiroAI")
 
     if user_query:
         handle_query(user_query)

@@ -13,25 +13,27 @@ os.environ["LANGSMITH_PROJECT"] = settings.LANGSMITH_PROJECT
 os.environ["LANGSMITH_ENDPOINT"] = settings.LANGSMITH_ENDPOINT
 
 from fastapi import FastAPI
-from app.api.routes import router
+from app.api.routes import router as rag_router
+from app.api.auth import router as auth_router
+from app.core.database import engine, Base
 
-# --- NEW: Lifespan event to pre-warm the RAG pipeline ---
+# --- NEW: Build the User Database Tables ---
+Base.metadata.create_all(bind=engine)
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     print("Server booting up: Pre-warming BumbiroAI pipeline...")
-    # By calling this here, the BM25 index builds in RAM before the server accepts traffic.
     get_rag_pipeline()
     print("BumbiroAI is fully indexed and ready to receive traffic!")
-    
-    yield # This tells FastAPI to run the server now
-    
+    yield
     print("Shutting down BumbiroAI...")
 
-# --- Add the lifespan to the FastAPI initialization ---
 app = FastAPI(
     title="Production RAG API",
     version="1.0",
     lifespan=lifespan
 )
 
-app.include_router(router)
+# --- NEW: Include both routers ---
+app.include_router(auth_router, prefix="/auth", tags=["Authentication"])
+app.include_router(rag_router, tags=["RAG Chat"])

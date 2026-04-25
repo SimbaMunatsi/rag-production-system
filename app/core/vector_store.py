@@ -1,21 +1,23 @@
-from langchain_chroma import Chroma
 from langchain_openai import OpenAIEmbeddings
+from langchain_postgres.vectorstores import PGVector
 
 from app.core.config import settings
 
-
 def get_vector_store(embeddings=None):
-    # If embeddings are passed from the ingestion pipeline, use them.
-    # Otherwise, initialize the default embeddings (useful for your retrieval/chat scripts).
     if embeddings is None:
         embeddings = OpenAIEmbeddings(
-            model="text-embedding-3-small", # Matching the model from embedder.py
+            model="text-embedding-3-small",
             api_key=settings.OPENAI_API_KEY
         )
 
-    vector_store = Chroma(
-        persist_directory=settings.CHROMA_DB_PATH,
-        embedding_function=embeddings
+    # Revert back to the stable, synchronous connection string
+    connection_string = settings.PGVECTOR_DATABASE_URL
+
+    vector_store = PGVector(
+        embeddings=embeddings,
+        collection_name="bumbiro_constitution",
+        connection=connection_string,
+        use_jsonb=True, 
     )
 
     return vector_store
