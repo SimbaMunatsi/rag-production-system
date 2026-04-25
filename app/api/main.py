@@ -16,6 +16,8 @@ from fastapi import FastAPI
 from app.api.routes import router as rag_router
 from app.api.auth import router as auth_router
 from app.core.database import engine, Base
+from app.models.user import User
+from app.models.chat import ChatMessage
 
 # --- NEW: Build the User Database Tables ---
 Base.metadata.create_all(bind=engine)

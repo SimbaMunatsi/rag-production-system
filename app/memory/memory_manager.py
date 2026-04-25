@@ -1,42 +1,36 @@
+import asyncio
+from sqlalchemy.orm import Session
 from app.memory.conversation_memory import ConversationMemory
-from app.memory.semantic_memory import SemanticMemory
-from app.memory.episodic_memory import EpisodicMemory
-
+from app.memory.agentic_memory import AgenticMemory
 
 class MemoryManager:
+    def __init__(self, db: Session, session_id: str):
+        self.session_id = session_id
+        self.conversation = ConversationMemory(db, session_id)
+        self.agentic = AgenticMemory(session_id)
 
-    def __init__(self, semantic_store):
-
-        self.conversation = ConversationMemory()
-        self.semantic = SemanticMemory(semantic_store)
-        self.episodic = EpisodicMemory()
-
-    def build_context(self, query):
-
+    async def build_context(self, query: str) -> dict:
+        # Fetch short term memory from Postgres
         conversation_context = self.conversation.get_context()
-
-        semantic_context = self.semantic.retrieve_facts(query)
+        
+        # Fetch long term, decayed memory from pgvector
+        semantic_context = await self.agentic.retrieve_relevant_facts(query)
 
         return {
             "conversation": conversation_context,
             "semantic": semantic_context
         }
 
-    def update(self, query, answer):
-
+    def update_sync(self, query: str, answer: str):
+        # 1. Save standard conversation synchronously to Postgres
         self.conversation.add("user", query)
         self.conversation.add("assistant", answer)
 
-        self.episodic.store_event(query, answer)
+    async def update_async(self, query: str, answer: str):
+        # 2. Trigger the LLM Reflection process asynchronously 
+        await self.agentic.reflect_and_store(query, answer)
 
-
-    # ---------- MEMORY REGISTRY ----------
-
-memory_registry = {}
-
-def get_memory(session_id, vector_store):
-
-    if session_id not in memory_registry:
-        memory_registry[session_id] = MemoryManager(vector_store)
-
-    return memory_registry[session_id]    
+def get_memory_manager(db: Session, session_id: str) -> MemoryManager:
+    # No more in-memory dictionary registries! 
+    # State is purely driven by the database and the session_id token.
+    return MemoryManager(db, session_id)
