@@ -6,10 +6,10 @@ from app.api.schemas import QueryRequest, QueryResponse
 
 router = APIRouter()
 
-
 @router.post("/query", response_model=QueryResponse)
-def query_rag(request: QueryRequest, rag=Depends(get_rag_pipeline)):
-    result = rag.run(
+async def query_rag(request: QueryRequest, rag=Depends(get_rag_pipeline)):
+    # Add 'await' since our pipeline is now asynchronous
+    result = await rag.run(
         query=request.query,
         session_id=request.session_id
     )
@@ -40,10 +40,10 @@ def stream_answer(answer: str):
     for token in answer.split():
         yield token + " "
 
-
 @router.post("/query-stream")
-def query_stream(request: QueryRequest, rag=Depends(get_rag_pipeline)):
-    result = rag.run(
+async def query_stream(request: QueryRequest, rag=Depends(get_rag_pipeline)):
+    # Add 'await' here as well
+    result = await rag.run(
         query=request.query,
         session_id=request.session_id
     )
@@ -52,7 +52,6 @@ def query_stream(request: QueryRequest, rag=Depends(get_rag_pipeline)):
         stream_answer(str(result["answer"])),
         media_type="text/plain"
     )
-
 
 @router.get("/health")
 def health():

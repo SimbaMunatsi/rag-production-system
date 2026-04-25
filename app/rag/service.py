@@ -1,4 +1,4 @@
-from app.retrieval.retriever import Retriever
+from app.retrieval.hybrid_retriever import HybridRetriever
 from app.retrieval.reranker import Reranker
 from app.retrieval.context_compressor import ContextCompressor
 from app.retrieval.query_rewriter import QueryRewriter
@@ -10,9 +10,15 @@ from app.guardrails.guardrails import Guardrails
 from app.memory.memory_manager import get_memory
 from app.core.vector_store import get_vector_store
 
-
-def create_rag_pipeline():
-    retriever = Retriever()
+def create_rag_pipeline(corpus_documents):
+    """
+    corpus_documents: A list of LangChain Document objects representing 
+    the entire constitution. This is required to build the BM25 keyword index.
+    """
+    
+    # Initialize the Weighted Hybrid Retriever
+    retriever = HybridRetriever(documents=corpus_documents)
+    
     reranker = Reranker()
     compressor = ContextCompressor()
     query_rewriter = QueryRewriter()

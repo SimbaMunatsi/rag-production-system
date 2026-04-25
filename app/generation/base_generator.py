@@ -1,9 +1,6 @@
 from abc import ABC, abstractmethod
 
-
 class BaseGenerator(ABC):
-
     @abstractmethod
-    def generate(self, prompt: str):
-
+    async def generate(self, prompt: str):
         pass
