@@ -1,51 +1,54 @@
 from fastapi import APIRouter, Depends
 from fastapi.responses import StreamingResponse
 
-from app.api.dependencies import get_rag_pipeline
+from app.api.dependencies import get_rag_pipeline, get_current_user
 from app.api.schemas import QueryRequest, QueryResponse
+from app.models.user import User
 
 router = APIRouter()
 
 @router.post("/query", response_model=QueryResponse)
-async def query_rag(request: QueryRequest, rag=Depends(get_rag_pipeline)):
-    # Add 'await' since our pipeline is now asynchronous
+async def query_rag(
+    request: QueryRequest, 
+    rag=Depends(get_rag_pipeline),
+    current_user: User = Depends(get_current_user) # <-- The route is now secure!
+):
+    # Namespace the session ID so users can't overlap chat histories
+    secure_session_id = f"user_{current_user.id}_{request.session_id}"
+    
     result = await rag.run(
         query=request.query,
-        session_id=request.session_id
+        session_id=secure_session_id
     )
 
     raw_sources = result.get("sources", [])
-    normalized_sources = []
-
-    for source in raw_sources:
-        if isinstance(source, str):
-            normalized_sources.append(source)
-        elif hasattr(source, "page_content"):
-            normalized_sources.append(source.page_content)
-        elif isinstance(source, dict):
-            if "content" in source:
-                normalized_sources.append(str(source["content"]))
-            else:
-                normalized_sources.append(str(source))
-        else:
-            normalized_sources.append(str(source))
+    normalized_sources = [
+        source.page_content if hasattr(source, "page_content") 
+        else str(source.get("content", source)) if isinstance(source, dict) 
+        else str(source) 
+        for source in raw_sources
+    ]
 
     return {
         "answer": str(result.get("answer", "")),
         "sources": normalized_sources
     }
 
-
 def stream_answer(answer: str):
     for token in answer.split():
         yield token + " "
 
 @router.post("/query-stream")
-async def query_stream(request: QueryRequest, rag=Depends(get_rag_pipeline)):
-    # Add 'await' here as well
+async def query_stream(
+    request: QueryRequest, 
+    rag=Depends(get_rag_pipeline),
+    current_user: User = Depends(get_current_user) # <-- Secure!
+):
+    secure_session_id = f"user_{current_user.id}_{request.session_id}"
+    
     result = await rag.run(
         query=request.query,
-        session_id=request.session_id
+        session_id=secure_session_id
     )
 
     return StreamingResponse(

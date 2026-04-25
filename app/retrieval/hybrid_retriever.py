@@ -1,3 +1,4 @@
+import asyncio
 from langchain_community.retrievers import BM25Retriever
 from app.core.vector_store import get_vector_store
 from app.retrieval.base_retriever import BaseRetriever
@@ -5,21 +6,24 @@ from app.retrieval.base_retriever import BaseRetriever
 class HybridRetriever(BaseRetriever):
     def __init__(self, documents, k=8, rrf_k=60):
         self.vector_store = get_vector_store()
-        # BM25 requires the document corpus loaded into memory
         self.keyword_retriever = BM25Retriever.from_documents(documents)
         self.keyword_retriever.k = k
         self.k = k
-        self.rrf_k = rrf_k # Constant used in RRF formula (typically 60)
+        self.rrf_k = rrf_k 
 
     async def retrieve(self, query):
-        # Feature 2: Async retrieval
-        # Note: Depending on your vector store, you might use asimilarity_search
-        vector_results = await self.vector_store.asimilarity_search(query, k=self.k)
+        # --- THE FIX: Offload synchronous searches to background threads ---
+        # This keeps FastAPI fully non-blocking without breaking SQLAlchemy!
         
-        # BM25 is purely CPU bound and fast, standard invoke is fine
-        keyword_results = self.keyword_retriever.invoke(query)
+        vector_results = await asyncio.to_thread(
+            self.vector_store.similarity_search, query, k=self.k
+        )
+        
+        keyword_results = await asyncio.to_thread(
+            self.keyword_retriever.invoke, query
+        )
 
-        # Feature 3: Reciprocal Rank Fusion (Weighted Hybrid Search)
+        # Reciprocal Rank Fusion (Weighted Hybrid Search)
         doc_scores = {}
         content_to_doc = {}
 
@@ -38,5 +42,4 @@ class HybridRetriever(BaseRetriever):
         # Sort documents by their combined RRF score
         sorted_contents = sorted(doc_scores.keys(), key=lambda x: doc_scores[x], reverse=True)
         
-        # Return the top K uniquely weighted documents
         return [content_to_doc[content] for content in sorted_contents[:self.k]]
