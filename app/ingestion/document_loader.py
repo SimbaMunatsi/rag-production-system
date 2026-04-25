@@ -7,15 +7,11 @@ from langchain_community.document_loaders import (
     UnstructuredHTMLLoader
 )
 
-
 class DocumentLoader:
-
     def __init__(self, path: str):
         self.path = path
 
     def load(self):
-
-
         loaders = [
             DirectoryLoader(
                 self.path,
@@ -48,13 +44,10 @@ class DocumentLoader:
                 silent_errors=True
             )
         ]
-
         documents = []
-
         
-
         for loader in loaders:
             loaded_docs = loader.load()
             documents.extend(loaded_docs) 
-
+            
         return documents
