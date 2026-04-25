@@ -389,6 +389,10 @@ rag-production-system/
 │   ├── ingest_data.py
 │   └── run_all_evals.py
 │
+|
+|__ Dockerfile.frontend
+|__ Dockerfile.backend
+|__ docker-compose.yml
 ├── .env
 ├── .env.example
 ├── requirements.txt
@@ -439,10 +443,10 @@ Create a `.env` file in the project root:
 
 ```env
 OPENAI_API_KEY=your_api_key
-export LANGSMITH_API_KEY=your_langsmith_key
-export LANGSMITH_TRACING=true
-export LANGSMITH_PROJECT=rag-production-system
-export LANGSMITH_ENDPOINT=your_langsmith_endpoint
+LANGSMITH_API_KEY=your_langsmith_key
+LANGSMITH_TRACING=true
+LANGSMITH_PROJECT=rag-production-system
+LANGSMITH_ENDPOINT=your_langsmith_endpoint
 CHROMA_DB_PATH=./data/embeddings
 ```
 
