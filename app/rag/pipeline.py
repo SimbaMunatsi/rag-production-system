@@ -24,7 +24,8 @@ class RAGPipeline:
     async def run(self, query, session_id):
         memory = self.memory_getter(session_id)
 
-        safe_query = self.guardrails.validate_input(query)
+        # 1. Await the async input guardrail check
+        safe_query = await self.guardrails.validate_input(query)
         memory_context = memory.build_context(safe_query)
 
         standalone_query = self.query_rewriter.rewrite(
@@ -32,10 +33,10 @@ class RAGPipeline:
             memory=memory_context
         )
 
-        # Await the hybrid async retrieval
+        # 2. Await the hybrid async retrieval
         docs = await self.retriever.retrieve(standalone_query)
         
-        # CPU-bound reranking
+        # 3. CPU-bound reranking
         docs = self.reranker.rerank(standalone_query, docs)
 
         if not docs:
@@ -58,9 +59,15 @@ class RAGPipeline:
             memory=memory_context
         )
 
-        # Await the async LLM generation
+        # 4. Await the async LLM generation
         answer = await self.generator.generate(prompt)
-        safe_answer = self.guardrails.validate_output(standalone_query, answer)
+        
+        # 5. --- THE FIX: Await the output guardrail AND pass the context_text ---
+        safe_answer = await self.guardrails.validate_output(
+            query=standalone_query, 
+            answer=answer, 
+            context_text=context_text
+        )
 
         memory.update(safe_query, safe_answer)
         sources = self.source_formatter.format(docs)
