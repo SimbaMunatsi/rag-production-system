@@ -1,9 +1,11 @@
 from fastapi import APIRouter, Depends
 from fastapi.responses import StreamingResponse
+from sqlalchemy.orm import Session
 
 from app.api.dependencies import get_rag_pipeline, get_current_user
 from app.api.schemas import QueryRequest, QueryResponse
 from app.models.user import User
+from app.core.database import get_db
 
 router = APIRouter()
 
@@ -11,14 +13,16 @@ router = APIRouter()
 async def query_rag(
     request: QueryRequest, 
     rag=Depends(get_rag_pipeline),
-    current_user: User = Depends(get_current_user) # <-- The route is now secure!
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db) # <-- Get the active DB session
 ):
-    # Namespace the session ID so users can't overlap chat histories
     secure_session_id = f"user_{current_user.id}_{request.session_id}"
     
+    # Pass the DB session into the pipeline
     result = await rag.run(
         query=request.query,
-        session_id=secure_session_id
+        session_id=secure_session_id,
+        db=db 
     )
 
     raw_sources = result.get("sources", [])
@@ -42,13 +46,16 @@ def stream_answer(answer: str):
 async def query_stream(
     request: QueryRequest, 
     rag=Depends(get_rag_pipeline),
-    current_user: User = Depends(get_current_user) # <-- Secure!
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db) # <-- Get the active DB session
 ):
     secure_session_id = f"user_{current_user.id}_{request.session_id}"
     
+    # Pass the DB session into the pipeline
     result = await rag.run(
         query=request.query,
-        session_id=secure_session_id
+        session_id=secure_session_id,
+        db=db
     )
 
     return StreamingResponse(

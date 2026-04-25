@@ -1,16 +1,5 @@
 class RAGPipeline:
-    def __init__(
-        self,
-        retriever,
-        reranker,
-        compressor,
-        prompt_builder,
-        generator,
-        memory_getter,
-        source_formatter,
-        guardrails,
-        query_rewriter,
-    ):
+    def __init__(self, retriever, reranker, compressor, prompt_builder, generator, memory_getter, source_formatter, guardrails, query_rewriter):
         self.retriever = retriever
         self.reranker = reranker
         self.compressor = compressor
@@ -21,22 +10,22 @@ class RAGPipeline:
         self.guardrails = guardrails
         self.query_rewriter = query_rewriter
 
-    async def run(self, query, session_id):
-        memory = self.memory_getter(session_id)
+    # Add 'db' to the runtime parameters
+    async def run(self, query, session_id, db):
+        # 1. Initialize memory with the active database session
+        memory = self.memory_getter(db, session_id)
 
-        # 1. Await the async input guardrail check
         safe_query = await self.guardrails.validate_input(query)
-        memory_context = memory.build_context(safe_query)
+        
+        # 2. Await the new async agentic memory retrieval
+        memory_context = await memory.build_context(safe_query)
 
         standalone_query = self.query_rewriter.rewrite(
             query=safe_query,
             memory=memory_context
         )
 
-        # 2. Await the hybrid async retrieval
         docs = await self.retriever.retrieve(standalone_query)
-        
-        # 3. CPU-bound reranking
         docs = self.reranker.rerank(standalone_query, docs)
 
         if not docs:
@@ -59,17 +48,18 @@ class RAGPipeline:
             memory=memory_context
         )
 
-        # 4. Await the async LLM generation
         answer = await self.generator.generate(prompt)
         
-        # 5. --- THE FIX: Await the output guardrail AND pass the context_text ---
         safe_answer = await self.guardrails.validate_output(
             query=standalone_query, 
             answer=answer, 
             context_text=context_text
         )
 
-        memory.update(safe_query, safe_answer)
+        # 3. Update memory (Sync for Postgres, Async for Agentic Vector Reflection)
+        memory.update_sync(safe_query, safe_answer)
+        await memory.update_async(safe_query, safe_answer)
+
         sources = self.source_formatter.format(docs)
 
         return {
