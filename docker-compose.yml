@@ -1,19 +1,49 @@
 version: '3.8'
 
 services:
-  postgres:
+  # --- 1. The Vector Database Container ---
+  postgres_db:
     image: pgvector/pgvector:pg16
     container_name: bumbiro_db
     restart: always
-    ports:
-      - "5432:5432"
     environment:
-      # Docker pulls these dynamically from your .env file
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
     volumes:
-      - bumbiro_pgdata:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+
+  # --- 2. The FastAPI Backend Container ---
+  bumbiro_api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: bumbiro_api
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      # Dynamically construct the DB URL using the synchronized secure variables
+      - DATABASE_URL=postgresql://${DB_USER}:${DB_PASSWORD}@postgres_db:5432/${DB_NAME}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    depends_on:
+      - postgres_db
+
+  # --- 3. The Streamlit Frontend Container ---
+  bumbiro_ui:
+    build:
+      context: .
+      dockerfile: Dockerfile.streamlit
+    container_name: bumbiro_ui
+    restart: always
+    ports:
+      - "8501:8501"
+    environment:
+      - API_URL=http://bumbiro_api:8000
+    depends_on:
+      - bumbiro_api
 
 volumes:
-  bumbiro_pgdata:
+  postgres_data:

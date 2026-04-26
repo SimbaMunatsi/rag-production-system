@@ -1,23 +1,29 @@
-# Use a lightweight Python base image
+# Use the official lightweight Python 3.11 image
 FROM python:3.11-slim
+
+# Prevent Python from writing .pyc files and force stdout logging
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy your requirements and install them first (Docker caches this step for speed)
+# Install system dependencies required for vector operations and database drivers
+RUN apt-get update \
+    && apt-get install -y gcc libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy your requirements and install them
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of your application code into the container
-COPY . .
-
-# --- THE MAGIC STEP ---
-# Run the caching script. Docker will execute this, generate the .pkl file, 
-# and permanently save it into the final image.
-RUN python -m scripts.generate_bm25_cache
+# Copy your application code, data, and maintenance scripts
+COPY ./app ./app
+COPY ./data ./data 
+COPY ./scripts ./scripts
 
 # Expose the port FastAPI runs on
 EXPOSE 8000
 
-# Start the server
+# Start the production server using Uvicorn
 CMD ["uvicorn", "app.api.main:app", "--host", "0.0.0.0", "--port", "8000"]

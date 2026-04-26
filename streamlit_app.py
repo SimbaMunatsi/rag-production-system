@@ -13,7 +13,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
-DEFAULT_API_URL = os.getenv("FASTAPI_BACKEND_URL", "http://localhost:8000").rstrip("/")
+API_URL = os.getenv("API_URL", "http://localhost:8000")
 
 
 def init_session_state() -> None:
@@ -29,7 +29,7 @@ def init_session_state() -> None:
     if "session_id" not in st.session_state:
         st.session_state.session_id = str(uuid.uuid4())
     if "api_url" not in st.session_state:
-        st.session_state.api_url = DEFAULT_API_URL
+        st.session_state.api_url = API_URL
     if "show_sources" not in st.session_state:
         st.session_state.show_sources = True
     if "backend_status" not in st.session_state:

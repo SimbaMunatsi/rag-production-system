@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, ConfigDict
 
 # --- Auth Schemas ---
 class UserCreate(BaseModel):
@@ -10,8 +10,8 @@ class UserResponse(BaseModel):
     email: EmailStr
     is_active: bool
 
-    class Config:
-        from_attributes = True
+    # --- Updated to Pydantic V2 syntax ---
+    model_config = ConfigDict(from_attributes=True)
 
 class Token(BaseModel):
     access_token: str
